@@ -1,133 +1,339 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Will You Be My Valentine?</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine? 💕</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Nunito:wght@400;600;700;800&display=swap">
+    <style>
+        * { box-sizing: border-box; }
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200..900&display=swap');
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 25%, #ff9a9e 50%, #fecfef 75%, #fad0c4 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 12s ease infinite;
+            font-family: "Nunito", sans-serif;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
 
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-  background: white;
-  font-family: "Nunito", sans-serif;
-}
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
 
-.container {
-  text-align: center;
-}
+        body::before {
+            content: '❤️';
+            position: fixed;
+            top: 10%;
+            left: 5%;
+            font-size: 2rem;
+            opacity: 0.3;
+            animation: float 6s ease-in-out infinite;
+            pointer-events: none;
+        }
+        body::after {
+            content: '🌸';
+            position: fixed;
+            top: 80%;
+            right: 8%;
+            font-size: 2.5rem;
+            opacity: 0.35;
+            animation: float 7s ease-in-out infinite 1s;
+            pointer-events: none;
+        }
 
-h1 {
-  font-size: 2.5em;
-  color: #d32f2f;
-}
+        .flower-float {
+            position: fixed;
+            font-size: 1.5rem;
+            opacity: 0.25;
+            pointer-events: none;
+            animation: float 5s ease-in-out infinite;
+        }
+        .flower-float:nth-child(1) { top: 15%; right: 15%; animation-delay: 0s; }
+        .flower-float:nth-child(2) { top: 70%; left: 10%; animation-delay: 2s; }
+        .flower-float:nth-child(3) { top: 40%; right: 5%; animation-delay: 1s; }
+        .flower-float:nth-child(4) { top: 60%; right: 20%; animation-delay: 3s; }
+        .flower-float:nth-child(5) { top: 25%; left: 8%; animation-delay: 1.5s; }
 
-.buttons {
-  margin-top: 20px;
-}
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
 
-button {
-  font-size: 1.5em;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
+        .view { text-align: center; }
+        .view.hidden { display: none !important; }
 
-.yes-button {
-  background-color: #fa0561;
-  color: white;
-  margin-right: 10px;
-}
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            padding: 40px 50px;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(214, 47, 47, 0.2),
+                        0 0 0 1px rgba(255, 255, 255, 0.8) inset,
+                        0 8px 32px rgba(0, 0, 0, 0.08);
+            max-width: 480px;
+            position: relative;
+            animation: containerGlow 4s ease-in-out infinite;
+        }
 
-.yes-button:hover {
-  background-color: #e03777;
-}
+        #yes-view .container {
+            padding: 45px 55px;
+            max-width: 500px;
+        }
 
-.no-button {
-  background-color: #d3d3d3;
-}
+        @keyframes containerGlow {
+            0%, 100% { box-shadow: 0 20px 60px rgba(214, 47, 47, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.8) inset; }
+            50% { box-shadow: 0 24px 70px rgba(214, 47, 47, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.9) inset; }
+        }
 
-.gif_container img {
-  width: 300px;
-  border-radius: 10px;
-  margin-top: 20px;
-}
+        .container::before,
+        .container::after {
+            content: '🌹';
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.6;
+            top: 15px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        .container::before { left: 20px; }
+        .container::after { right: 20px; }
 
-/* YES PAGE */
-.yes-page {
-  display: none;
-}
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.6; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
 
-.yes-page h1 {
-  font-size: 3em;
-}
-</style>
+        h1, .header_text {
+            font-family: "Playfair Display", serif;
+            font-size: 2.2em;
+            font-weight: 700;
+            color: #c41e3a;
+            text-shadow: 2px 2px 4px rgba(196, 30, 58, 0.2);
+            margin: 0 0 10px 0;
+            letter-spacing: 0.5px;
+        }
+
+        #yes-view .header_text { font-size: 2.5em; margin-bottom: 8px; }
+
+        .subtitle {
+            font-size: 1rem;
+            color: #e75480;
+            margin-bottom: 24px;
+            opacity: 0.9;
+        }
+
+        #yes-view .subtitle { font-size: 1.1em; opacity: 0.95; }
+
+        .gif_container {
+            margin: 24px 0 28px 0;
+            position: relative;
+        }
+
+        #yes-view .gif_container { margin-top: 20px; }
+
+        .gif_container::before {
+            content: '🌸';
+            position: absolute;
+            left: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.8rem;
+            opacity: 0.7;
+            animation: sway 3s ease-in-out infinite;
+        }
+
+        .gif_container::after {
+            content: '🌸';
+            position: absolute;
+            right: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.8rem;
+            opacity: 0.7;
+            animation: sway 3s ease-in-out infinite 0.5s;
+        }
+
+        #yes-view .gif_container::before { left: -25px; font-size: 2rem; }
+        #yes-view .gif_container::after { right: -25px; font-size: 2rem; }
+
+        @keyframes sway {
+            0%, 100% { transform: translateY(-50%) rotate(-5deg); }
+            50% { transform: translateY(-50%) rotate(5deg); }
+        }
+
+        .gif_container img {
+            width: 280px;
+            max-width: 90%;
+            height: auto;
+            border-radius: 16px;
+            box-shadow: 0 12px 40px rgba(214, 47, 47, 0.25);
+            border: 3px solid rgba(255, 255, 255, 0.9);
+            animation: gentleFloat 4s ease-in-out infinite;
+        }
+
+        #yes-view .gif_container img {
+            width: 320px;
+            max-width: 95%;
+            box-shadow: 0 15px 45px rgba(214, 47, 47, 0.3);
+        }
+
+        @keyframes gentleFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .buttons {
+            margin-top: 28px;
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .yes-button {
+            font-family: "Nunito", sans-serif;
+            font-size: 1.4em;
+            font-weight: 700;
+            padding: 14px 32px;
+            background: linear-gradient(135deg, #ff6b9d 0%, #c41e3a 100%);
+            color: white !important;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(196, 30, 58, 0.4);
+            transition: all 0.3s ease;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .yes-button:hover {
+            background: linear-gradient(135deg, #ff85b3 0%, #d62850 100%);
+            transform: scale(1.05);
+            box-shadow: 0 12px 35px rgba(196, 30, 58, 0.5);
+        }
+
+        .yes-button:active { animation: vibrate 0.3s ease; }
+
+        .no-button {
+            font-family: "Nunito", sans-serif;
+            font-size: 1.2em;
+            font-weight: 600;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            color: #555 !important;
+            border: 2px solid #ddd;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            min-width: 140px;
+        }
+
+        .no-button:hover {
+            background: linear-gradient(135deg, #fafafa 0%, #eee 100%);
+        }
+
+        .no-button.shake {
+            animation: shake 0.6s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-8px); }
+            20%, 40%, 60%, 80% { transform: translateX(8px); }
+        }
+
+        @keyframes vibrate {
+            0%, 100% { transform: translate(0, 0); }
+            20% { transform: translate(-2px, -2px); }
+            40% { transform: translate(2px, 2px); }
+            60% { transform: translate(-2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+        }
+    </style>
 </head>
-
 <body>
+    <span class="flower-float">🌸</span>
+    <span class="flower-float">🌺</span>
+    <span class="flower-float">🌷</span>
+    <span class="flower-float">💐</span>
+    <span class="flower-float">🌹</span>
 
-<!-- MAIN PAGE -->
-<div class="container main-page">
-  <div class="gif_container">
-    <img src="https://gifdb.com/images/high/cute-love-bear-roses-ou7zho5oosxnpo6k.gif">
-  </div>
+    <div id="ask-view" class="view">
+        <div class="container">
+            <div class="gif_container">
+                <img src="https://gifdb.com/images/high/cute-love-bear-roses-ou7zho5oosxnpo6k.gif" alt="Cute Valentine flowers and bear">
+            </div>
+            <h1>Will you be my Valentine?</h1>
+            <p class="subtitle">🌸 Flowers & love await 🌸</p>
+            <div class="buttons">
+                <button class="yes-button" onclick="handleYesClick()">Yes! 💕</button>
+                <button class="no-button" onclick="handleNoClick()">No</button>
+            </div>
+        </div>
+    </div>
 
-  <h1>Will you be my Valentine?</h1>
+    <div id="yes-view" class="view hidden">
+        <div class="container">
+            <h1 class="header_text">Knew you would say yes!</h1>
+            <p class="subtitle">You've made my Valentine's Day 💐</p>
+            <div class="gif_container">
+                <img src="https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif" alt="Happy Valentine!">
+            </div>
+        </div>
+    </div>
 
-  <div class="buttons">
-    <button class="yes-button" onclick="handleYesClick()">Yes</button>
-    <button class="no-button" onclick="handleNoClick()">No</button>
-  </div>
-</div>
+    <script>
+        const messages = [
+            "Are you sure?",
+            "Really sure??",
+            "Are you positive?",
+            "Pookie please...",
+            "Just think about it!",
+            "If you say no, I will be really sad...",
+            "I will be very sad...",
+            "I will be very very very sad...",
+            "Ok fine, I will stop asking...",
+            "Just kidding, say yes please! ❤️"
+        ];
+        let messageIndex = 0;
 
-<!-- YES PAGE -->
-<div class="container yes-page">
-  <h1>Knew you would say yes! ❤️</h1>
-  <div class="gif_container">
-    <img src="https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif">
-  </div>
-</div>
+        function vibrate(pattern) {
+            if ('vibrate' in navigator) navigator.vibrate(pattern);
+        }
 
-<script>
-const messages = [
-  "Are you sure?",
-  "Really sure??",
-  "Are you positive?",
-  "Pookie please...",
-  "Just think about it!",
-  "If you say no, I will be really sad...",
-  "I will be very sad...",
-  "I will be very very very sad...",
-  "Ok fine, I will stop asking...",
-  "Just kidding, say yes please! ❤️"
-];
+        function handleNoClick() {
+            const noButton = document.querySelector('.no-button');
+            const yesButton = document.querySelector('.yes-button');
+            vibrate([80, 50, 80, 50, 100]);
+            noButton.classList.remove('shake');
+            void noButton.offsetWidth;
+            noButton.classList.add('shake');
+            setTimeout(() => noButton.classList.remove('shake'), 600);
+            noButton.textContent = messages[messageIndex];
+            messageIndex = (messageIndex + 1) % messages.length;
+            const currentSize = parseFloat(window.getComputedStyle(yesButton).fontSize);
+            yesButton.style.fontSize = `${Math.min(currentSize * 1.15, 3)}em`;
+        }
 
-let messageIndex = 0;
-
-function handleNoClick() {
-  const noButton = document.querySelector('.no-button');
-  const yesButton = document.querySelector('.yes-button');
-
-  noButton.textContent = messages[messageIndex];
-  messageIndex = (messageIndex + 1) % messages.length;
-
-  const currentSize = parseFloat(
-    window.getComputedStyle(yesButton).fontSize
-  );
-  yesButton.style.fontSize = currentSize * 1.5 + "px";
-}
-
-function handleYesClick() {
-  document.querySelector(".main-page").style.display = "none";
-  document.querySelector(".yes-page").style.display = "block";
-}
-</script>
-
+        function handleYesClick() {
+            vibrate([50, 30, 50, 30, 100]);
+            const yesButton = document.querySelector('.yes-button');
+            if (yesButton) {
+                yesButton.style.transform = 'scale(1.2)';
+                yesButton.style.boxShadow = '0 15px 45px rgba(196, 30, 58, 0.6)';
+            }
+            setTimeout(() => {
+                document.getElementById('ask-view').classList.add('hidden');
+                document.getElementById('yes-view').classList.remove('hidden');
+            }, 400);
+        }
+    </script>
 </body>
 </html>
