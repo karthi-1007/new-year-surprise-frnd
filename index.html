@@ -1,339 +1,390 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Will You Be My Valentine? 💕</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Nunito:wght@400;600;700;800&display=swap">
-    <style>
-        * { box-sizing: border-box; }
+<meta charset="UTF-8">
+<title>Mahashivratri</title>
 
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 25%, #ff9a9e 50%, #fecfef 75%, #fad0c4 100%);
-            background-size: 400% 400%;
-            animation: gradientShift 12s ease infinite;
-            font-family: "Nunito", sans-serif;
-            flex-direction: column;
-            overflow-x: hidden;
-        }
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
 
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
+<style>
+*{ box-sizing:border-box; }
 
-        body::before {
-            content: '❤️';
-            position: fixed;
-            top: 10%;
-            left: 5%;
-            font-size: 2rem;
-            opacity: 0.3;
-            animation: float 6s ease-in-out infinite;
-            pointer-events: none;
-        }
-        body::after {
-            content: '🌸';
-            position: fixed;
-            top: 80%;
-            right: 8%;
-            font-size: 2.5rem;
-            opacity: 0.35;
-            animation: float 7s ease-in-out infinite 1s;
-            pointer-events: none;
-        }
+body{
+  margin:0;
+  min-height:100vh;
+  background: radial-gradient(circle at top, #0a0f2c, #000);
+  font-family: 'Poppins', sans-serif;
+  text-align:center;
+  color:white;
+  overflow-x:hidden;
+  overflow-y:auto;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
 
-        .flower-float {
-            position: fixed;
-            font-size: 1.5rem;
-            opacity: 0.25;
-            pointer-events: none;
-            animation: float 5s ease-in-out infinite;
-        }
-        .flower-float:nth-child(1) { top: 15%; right: 15%; animation-delay: 0s; }
-        .flower-float:nth-child(2) { top: 70%; left: 10%; animation-delay: 2s; }
-        .flower-float:nth-child(3) { top: 40%; right: 5%; animation-delay: 1s; }
-        .flower-float:nth-child(4) { top: 60%; right: 20%; animation-delay: 3s; }
-        .flower-float:nth-child(5) { top: 25%; left: 8%; animation-delay: 1.5s; }
+/* Title */
+h1{
+  margin:0 0 10px 0;
+  font-size:clamp(24px, 6vw, 38px);
+  letter-spacing:2px;
+}
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(10deg); }
-        }
+/* Main content - centered block */
+.main-content{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  max-width:400px;
+  margin:0 auto;
+}
 
-        .view { text-align: center; }
-        .view.hidden { display: none !important; }
+/* Shiva Lingam - photo */
+.lingam-wrapper{
+  position:relative;
+  margin-top:20px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  width:100%;
+}
 
-        .container {
-            text-align: center;
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            padding: 40px 50px;
-            border-radius: 24px;
-            box-shadow: 0 20px 60px rgba(214, 47, 47, 0.2),
-                        0 0 0 1px rgba(255, 255, 255, 0.8) inset,
-                        0 8px 32px rgba(0, 0, 0, 0.08);
-            max-width: 480px;
-            position: relative;
-            animation: containerGlow 4s ease-in-out infinite;
-        }
+.lingam-photo{
+  width:280px;
+  max-width:90vw;
+  height:auto;
+  border-radius:24px;
+  box-shadow:0 0 30px rgba(0,234,255,0.2), 0 20px 50px rgba(0,0,0,0.5);
+  border:3px solid rgba(255,255,255,0.15);
+  display:block;
+  transition:0.5s;
+  animation:glowPulse 3s ease-in-out infinite;
+}
 
-        #yes-view .container {
-            padding: 45px 55px;
-            max-width: 500px;
-        }
+/* Vibration / pulse glow on image */
+@keyframes glowPulse{
+  0%, 100%{ box-shadow:0 0 25px rgba(0,234,255,0.25), 0 20px 50px rgba(0,0,0,0.5); }
+  50%{ box-shadow:0 0 40px rgba(0,234,255,0.45), 0 25px 55px rgba(0,0,0,0.5); }
+}
 
-        @keyframes containerGlow {
-            0%, 100% { box-shadow: 0 20px 60px rgba(214, 47, 47, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.8) inset; }
-            50% { box-shadow: 0 24px 70px rgba(214, 47, 47, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.9) inset; }
-        }
+.base{
+  width:260px;
+  max-width:85%;
+  height:40px;
+  background:#111;
+  border-radius:50px;
+  margin-top:-20px;
+}
 
-        .container::before,
-        .container::after {
-            content: '🌹';
-            position: absolute;
-            font-size: 2rem;
-            opacity: 0.6;
-            top: 15px;
-            animation: pulse 2s ease-in-out infinite;
-        }
-        .container::before { left: 20px; }
-        .container::after { right: 20px; }
+/* Glow after play - stronger vibration */
+.active .lingam-photo{
+  animation:activeGlow 1.2s ease-in-out infinite;
+}
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.6; }
-            50% { transform: scale(1.1); opacity: 0.8; }
-        }
+@keyframes activeGlow{
+  0%, 100%{
+    box-shadow:0 0 20px #00eaff, 0 0 50px #00eaff, 0 0 100px rgba(0,234,255,0.4);
+  }
+  50%{
+    box-shadow:0 0 35px #00eaff, 0 0 80px #00eaff, 0 0 140px rgba(0,234,255,0.6);
+  }
+}
 
-        h1, .header_text {
-            font-family: "Playfair Display", serif;
-            font-size: 2.2em;
-            font-weight: 700;
-            color: #c41e3a;
-            text-shadow: 2px 2px 4px rgba(196, 30, 58, 0.2);
-            margin: 0 0 10px 0;
-            letter-spacing: 0.5px;
-        }
+/* Play Button - centered, with vibration */
+.play-btn-wrap{
+  margin-top:36px;
+  display:flex;
+  justify-content:center;
+  width:100%;
+}
 
-        #yes-view .header_text { font-size: 2.5em; margin-bottom: 8px; }
+button{
+  padding:16px 40px;
+  font-size:clamp(16px, 4vw, 18px);
+  border:none;
+  border-radius:30px;
+  background:#00eaff;
+  color:#000;
+  cursor:pointer;
+  font-weight:600;
+  box-shadow:0 0 20px rgba(0,234,255,0.4);
+  transition:transform 0.2s, box-shadow 0.3s;
+  animation:btnGlow 2.5s ease-in-out infinite;
+}
 
-        .subtitle {
-            font-size: 1rem;
-            color: #e75480;
-            margin-bottom: 24px;
-            opacity: 0.9;
-        }
+button:hover{
+  transform:scale(1.05);
+  box-shadow:0 0 35px #00eaff, 0 0 60px rgba(0,234,255,0.5);
+}
 
-        #yes-view .subtitle { font-size: 1.1em; opacity: 0.95; }
+button:active{
+  animation:btnVibrate 0.4s ease;
+}
 
-        .gif_container {
-            margin: 24px 0 28px 0;
-            position: relative;
-        }
+/* Button glow vibration */
+@keyframes btnGlow{
+  0%, 100%{ box-shadow:0 0 20px rgba(0,234,255,0.4); }
+  50%{ box-shadow:0 0 30px rgba(0,234,255,0.7), 0 0 50px rgba(0,234,255,0.3); }
+}
 
-        #yes-view .gif_container { margin-top: 20px; }
+/* Click vibration feel */
+@keyframes btnVibrate{
+  0%, 100%{ transform:scale(1) translateX(0); }
+  25%{ transform:scale(0.98) translateX(-3px); }
+  75%{ transform:scale(0.98) translateX(3px); }
+}
 
-        .gif_container::before {
-            content: '🌸';
-            position: absolute;
-            left: -15px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 1.8rem;
-            opacity: 0.7;
-            animation: sway 3s ease-in-out infinite;
-        }
+/* Active state - button pulses with song */
+body.active .play-btn-wrap button{
+  animation:activeBtnGlow 1s ease-in-out infinite;
+}
 
-        .gif_container::after {
-            content: '🌸';
-            position: absolute;
-            right: -15px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 1.8rem;
-            opacity: 0.7;
-            animation: sway 3s ease-in-out infinite 0.5s;
-        }
+@keyframes activeBtnGlow{
+  0%, 100%{ box-shadow:0 0 25px #00eaff, 0 0 50px rgba(0,234,255,0.5); }
+  50%{ box-shadow:0 0 45px #00eaff, 0 0 90px rgba(0,234,255,0.7); }
+}
 
-        #yes-view .gif_container::before { left: -25px; font-size: 2rem; }
-        #yes-view .gif_container::after { right: -25px; font-size: 2rem; }
+/* Playlist section - below the image */
+.playlist-section{
+  width:100%;
+  max-width:560px;
+  margin-top:48px;
+  margin-bottom:24px;
+  padding:0 16px;
+}
 
-        @keyframes sway {
-            0%, 100% { transform: translateY(-50%) rotate(-5deg); }
-            50% { transform: translateY(-50%) rotate(5deg); }
-        }
+.playlist-section h2{
+  font-size:clamp(18px, 4vw, 22px);
+  font-weight:600;
+  margin:0 0 16px 0;
+  color:rgba(255,255,255,0.95);
+}
 
-        .gif_container img {
-            width: 280px;
-            max-width: 90%;
-            height: auto;
-            border-radius: 16px;
-            box-shadow: 0 12px 40px rgba(214, 47, 47, 0.25);
-            border: 3px solid rgba(255, 255, 255, 0.9);
-            animation: gentleFloat 4s ease-in-out infinite;
-        }
+.youtube-player-wrap{
+  width:100%;
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:0 0 30px rgba(0,234,255,0.2);
+  border:2px solid rgba(255,255,255,0.1);
+  margin-bottom:20px;
+  background:#000;
+}
 
-        #yes-view .gif_container img {
-            width: 320px;
-            max-width: 95%;
-            box-shadow: 0 15px 45px rgba(214, 47, 47, 0.3);
-        }
+.youtube-player-wrap iframe{
+  width:100%;
+  aspect-ratio:16/9;
+  display:block;
+  border:none;
+}
 
-        @keyframes gentleFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-        }
+.open-yt-wrap{
+  margin:-8px 0 16px 0;
+  font-size:14px;
+}
 
-        .buttons {
-            margin-top: 28px;
-            display: flex;
-            gap: 16px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
+.open-yt-wrap a{
+  color:#00eaff;
+  text-decoration:none;
+}
 
-        .yes-button {
-            font-family: "Nunito", sans-serif;
-            font-size: 1.4em;
-            font-weight: 700;
-            padding: 14px 32px;
-            background: linear-gradient(135deg, #ff6b9d 0%, #c41e3a 100%);
-            color: white !important;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 8px 25px rgba(196, 30, 58, 0.4);
-            transition: all 0.3s ease;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-        }
+.open-yt-wrap a:hover{
+  text-decoration:underline;
+}
 
-        .yes-button:hover {
-            background: linear-gradient(135deg, #ff85b3 0%, #d62850 100%);
-            transform: scale(1.05);
-            box-shadow: 0 12px 35px rgba(196, 30, 58, 0.5);
-        }
+.open-yt-wrap .if-unavailable{
+  color:rgba(255,255,255,0.5);
+  font-size:12px;
+}
 
-        .yes-button:active { animation: vibrate 0.3s ease; }
+.playlist-list{
+  list-style:none;
+  margin:0;
+  padding:0;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
 
-        .no-button {
-            font-family: "Nunito", sans-serif;
-            font-size: 1.2em;
-            font-weight: 600;
-            padding: 12px 24px;
-            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
-            color: #555 !important;
-            border: 2px solid #ddd;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            min-width: 140px;
-        }
+.playlist-list li{
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.12);
+  border-radius:12px;
+  padding:12px 16px;
+  cursor:pointer;
+  text-align:left;
+  transition:background 0.2s, box-shadow 0.2s;
+}
 
-        .no-button:hover {
-            background: linear-gradient(135deg, #fafafa 0%, #eee 100%);
-        }
+.playlist-list li:hover{
+  background:rgba(0,234,255,0.12);
+  box-shadow:0 0 15px rgba(0,234,255,0.2);
+}
 
-        .no-button.shake {
-            animation: shake 0.6s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
-        }
+.playlist-list li.playing{
+  background:rgba(0,234,255,0.18);
+  border-color:rgba(0,234,255,0.5);
+  box-shadow:0 0 20px rgba(0,234,255,0.25);
+}
 
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            10%, 30%, 50%, 70%, 90% { transform: translateX(-8px); }
-            20%, 40%, 60%, 80% { transform: translateX(8px); }
-        }
+.playlist-list .song-num{
+  color:rgba(0,234,255,0.9);
+  font-weight:600;
+  margin-right:8px;
+}
 
-        @keyframes vibrate {
-            0%, 100% { transform: translate(0, 0); }
-            20% { transform: translate(-2px, -2px); }
-            40% { transform: translate(2px, 2px); }
-            60% { transform: translate(-2px, 2px); }
-            80% { transform: translate(2px, -2px); }
-        }
-    </style>
+.playlist-list .song-title{
+  color:rgba(255,255,255,0.9);
+}
+
+/* Shiva quotes */
+.quotes-section{
+  width:100%;
+  max-width:560px;
+  margin-top:40px;
+  margin-bottom:48px;
+  padding:0 16px;
+}
+
+.quotes-section h2{
+  font-size:clamp(18px, 4vw, 22px);
+  font-weight:600;
+  margin:0 0 20px 0;
+  color:rgba(255,255,255,0.95);
+}
+
+.quote-block{
+  background:rgba(255,255,255,0.05);
+  border-left:4px solid rgba(0,234,255,0.6);
+  border-radius:0 12px 12px 0;
+  padding:16px 20px;
+  margin-bottom:14px;
+  text-align:left;
+}
+
+.quote-block p{
+  margin:0;
+  font-size:15px;
+  line-height:1.5;
+  color:rgba(255,255,255,0.9);
+  font-style:italic;
+}
+
+.quote-block .om{
+  display:block;
+  margin-top:10px;
+  font-size:20px;
+  color:rgba(0,234,255,0.9);
+  font-style:normal;
+}
+
+.quote-above-btn{
+  margin-top:24px;
+  margin-bottom:0;
+  width:100%;
+}
+
+/* Flowers animation */
+.flower{
+  position:fixed;
+  top:-20px;
+  font-size:22px;
+  animation:fall linear infinite;
+  pointer-events:none;
+}
+
+@keyframes fall{
+  0%{transform:translateY(-10vh);}
+  100%{transform:translateY(110vh);}
+}
+</style>
 </head>
+
 <body>
-    <span class="flower-float">🌸</span>
-    <span class="flower-float">🌺</span>
-    <span class="flower-float">🌷</span>
-    <span class="flower-float">💐</span>
-    <span class="flower-float">🌹</span>
 
-    <div id="ask-view" class="view">
-        <div class="container">
-            <div class="gif_container">
-                <img src="https://gifdb.com/images/high/cute-love-bear-roses-ou7zho5oosxnpo6k.gif" alt="Cute Valentine flowers and bear">
-            </div>
-            <h1>Will you be my Valentine?</h1>
-            <p class="subtitle">🌸 Flowers & love await 🌸</p>
-            <div class="buttons">
-                <button class="yes-button" onclick="handleYesClick()">Yes! 💕</button>
-                <button class="no-button" onclick="handleNoClick()">No</button>
-            </div>
-        </div>
-    </div>
+<h1>🕉️ Happy Mahashivratri 🕉️</h1>
 
-    <div id="yes-view" class="view hidden">
-        <div class="container">
-            <h1 class="header_text">Knew you would say yes!</h1>
-            <p class="subtitle">You've made my Valentine's Day 💐</p>
-            <div class="gif_container">
-                <img src="https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif" alt="Happy Valentine!">
-            </div>
-        </div>
-    </div>
+<div class="main-content">
+  <div class="lingam-wrapper" id="wrapper">
+    <img class="lingam-photo" src="https://ik.imagekit.io/i2yzb4amqb/istockphoto-1136071040-612x612.jpg" alt="Shiva Lingam">
+  </div>
+  <div class="quote-block quote-above-btn">
+    <p>You are not in the world; the world is in you. When the mind is still, you see the Self.</p>
+    <span class="om">ॐ नमः शिवाय</span>
+  </div>
+  <div class="play-btn-wrap">
+    <button onclick="playSong()">Play Devotional Song</button>
+  </div>
+</div>
 
-    <script>
-        const messages = [
-            "Are you sure?",
-            "Really sure??",
-            "Are you positive?",
-            "Pookie please...",
-            "Just think about it!",
-            "If you say no, I will be really sad...",
-            "I will be very sad...",
-            "I will be very very very sad...",
-            "Ok fine, I will stop asking...",
-            "Just kidding, say yes please! ❤️"
-        ];
-        let messageIndex = 0;
+<!-- Shiva songs playlist - plays in YouTube player below -->
+<section class="playlist-section" id="playlist-section">
+  <h2>🕉️ Shiva devotional playlist</h2>
+  <div class="youtube-player-wrap">
+    <iframe id="yt-player" src="https://www.youtube.com/embed/l8pN_11Ilrc?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="Shiva devotional song"></iframe>
+  </div>
+  <p class="open-yt-wrap">
+    <a id="open-yt-link" href="https://www.youtube.com/watch?v=SasYp87Grdw" target="_blank" rel="noopener">▶ Open this song on YouTube</a> <span class="if-unavailable">(if video doesn’t play here)</span>
+  </p>
+  <ul class="playlist-list">
+    <li data-video="l8pN_11Ilrc" onclick="playYouTube('l8pN_11Ilrc', this)"><span class="song-num">1.</span><span class="song-title">Shiva devotional</span></li>
+    <li data-video="SasYp87Grdw" onclick="playYouTube('SasYp87Grdw', this)"><span class="song-num">2.</span><span class="song-title">Maha Mrityunjaya Mantra (Om Tryambakam)</span></li>
+    <li data-video="AhjdqyB4BOs" onclick="playYouTube('AhjdqyB4BOs', this)"><span class="song-num">3.</span><span class="song-title">Mahamrityunjay Mantra</span></li>
+    <li data-video="bOOSmm8HFtk" onclick="playYouTube('bOOSmm8HFtk', this)"><span class="song-num">4.</span><span class="song-title">Shiva devotional</span></li>
+    <li data-video="gk8Aa4Uo2qs" onclick="playYouTube('gk8Aa4Uo2qs', this)"><span class="song-num">5.</span><span class="song-title">Shiva devotional</span></li>
+  </ul>
+</section>
 
-        function vibrate(pattern) {
-            if ('vibrate' in navigator) navigator.vibrate(pattern);
-        }
+<script>
+var currentPlayingLi = null;
 
-        function handleNoClick() {
-            const noButton = document.querySelector('.no-button');
-            const yesButton = document.querySelector('.yes-button');
-            vibrate([80, 50, 80, 50, 100]);
-            noButton.classList.remove('shake');
-            void noButton.offsetWidth;
-            noButton.classList.add('shake');
-            setTimeout(() => noButton.classList.remove('shake'), 600);
-            noButton.textContent = messages[messageIndex];
-            messageIndex = (messageIndex + 1) % messages.length;
-            const currentSize = parseFloat(window.getComputedStyle(yesButton).fontSize);
-            yesButton.style.fontSize = `${Math.min(currentSize * 1.15, 3)}em`;
-        }
+function playSong(){
+  document.getElementById("wrapper").classList.add("active");
+  document.body.classList.add("active");
+  startFlowers();
+  // Scroll to playlist and play first Shiva song in YouTube player
+  var firstVideo = "l8pN_11Ilrc";
+  var iframe = document.getElementById("yt-player");
+  iframe.src = "https://www.youtube.com/embed/" + firstVideo + "?autoplay=1&rel=0";
+  var link = document.getElementById("open-yt-link");
+  if(link) link.href = "https://www.youtube.com/watch?v=" + firstVideo;
+  var section = document.getElementById("playlist-section");
+  if(section) section.scrollIntoView({ behavior: "smooth", block: "start" });
+  var firstLi = document.querySelector(".playlist-list li[data-video='" + firstVideo + "']");
+  if(firstLi){
+    if(currentPlayingLi) currentPlayingLi.classList.remove("playing");
+    firstLi.classList.add("playing");
+    currentPlayingLi = firstLi;
+  }
+}
 
-        function handleYesClick() {
-            vibrate([50, 30, 50, 30, 100]);
-            const yesButton = document.querySelector('.yes-button');
-            if (yesButton) {
-                yesButton.style.transform = 'scale(1.2)';
-                yesButton.style.boxShadow = '0 15px 45px rgba(196, 30, 58, 0.6)';
-            }
-            setTimeout(() => {
-                document.getElementById('ask-view').classList.add('hidden');
-                document.getElementById('yes-view').classList.remove('hidden');
-            }, 400);
-        }
-    </script>
+function playYouTube(videoId, el){
+  var iframe = document.getElementById("yt-player");
+  iframe.src = "https://www.youtube.com/embed/" + videoId + "?autoplay=1&rel=0";
+  var link = document.getElementById("open-yt-link");
+  if(link) link.href = "https://www.youtube.com/watch?v=" + videoId;
+  if(currentPlayingLi) currentPlayingLi.classList.remove("playing");
+  if(el){ el.classList.add("playing"); currentPlayingLi = el; }
+  document.getElementById("wrapper").classList.add("active");
+  document.body.classList.add("active");
+  startFlowers();
+}
+
+function startFlowers(){
+  if(document.body.querySelectorAll(".flower").length > 0) return;
+  for(var i=0;i<25;i++){
+    var flower = document.createElement("div");
+    flower.innerHTML = "🌸";
+    flower.classList.add("flower");
+    flower.style.left = Math.random()*100 + "vw";
+    flower.style.animationDuration = (3+Math.random()*5) + "s";
+    document.body.appendChild(flower);
+  }
+}
+</script>
+
 </body>
 </html>
