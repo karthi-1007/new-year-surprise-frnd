@@ -3,1367 +3,1164 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SafeSource v3 — Supplier Food Safety Portal</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>SafeSource v3 — UX Case Study & Design System</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #F2F0EB;
-  --surface: #FFFFFF;
-  --surface2: #EDEAE4;
-  --surface3: #E4E0D9;
-  --border: #DEDAD2;
-  --border2: #C8C3BB;
-  --text: #1A1814;
-  --text2: #5E5B55;
-  --text3: #9B9892;
-  --accent: #186044;
-  --accent-light: #D7EFE3;
-  --accent-mid: #0D4E35;
-  --danger: #B52D2D;
-  --danger-light: #FAEBEB;
-  --warning: #A05E08;
-  --warning-light: #FEF0D9;
-  --info: #1553A0;
-  --info-light: #E2EDFB;
+  --ink: #0E0E0E;
+  --ink2: #3A3A3A;
+  --ink3: #7A7A7A;
+  --paper: #F7F5F0;
+  --white: #FFFFFF;
+  --border: #E2DDD6;
+  --green: #186044;
+  --green-light: #D7EFE3;
+  --green-mid: #0D4E35;
+  --red: #B52D2D;
+  --red-light: #FAEBEB;
+  --amber: #A05E08;
+  --amber-light: #FEF0D9;
+  --blue: #1553A0;
+  --blue-light: #E2EDFB;
   --purple: #4640B0;
   --purple-light: #ECEAFE;
-  --radius: 10px;
-  --radius-lg: 14px;
-  --shadow: 0 1px 3px rgba(0,0,0,.06), 0 1px 8px rgba(0,0,0,.04);
-  --shadow-md: 0 4px 20px rgba(0,0,0,.1);
-  --focus-ring: 0 0 0 3px rgba(24,96,68,.18);
+  --gold: #C9922A;
+
+  --verdict-yes: #0D4E35;
+  --verdict-yes-bg: #D7EFE3;
+  --verdict-maybe: #7A5800;
+  --verdict-maybe-bg: #FFF3CD;
+
+  --r: 10px;
+  --r-lg: 16px;
+  --shadow: 0 2px 12px rgba(0,0,0,.07);
+  --shadow-lg: 0 8px 40px rgba(0,0,0,.12);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); font-size: 14px; line-height: 1.6; min-height: 100vh; }
 
-/* ── TOPBAR ── */
-.topbar { background: var(--surface); border-bottom: 1.5px solid var(--border); padding: 0 28px; height: 56px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 200; }
-.logo { font-size: 16px; font-weight: 700; letter-spacing: -.3px; display: flex; align-items: center; gap: 8px; color: var(--text); }
-.logo-mark { width: 26px; height: 26px; background: var(--accent); border-radius: 7px; display: flex; align-items: center; justify-content: center; }
-.logo-mark svg { width: 14px; height: 14px; fill: #fff; }
-.nav-tabs { display: flex; gap: 2px; background: var(--surface2); padding: 4px; border-radius: 10px; }
-.nav-tab { padding: 6px 15px; border-radius: 7px; font-size: 13px; font-weight: 500; cursor: pointer; color: var(--text2); transition: all .15s; border: none; background: transparent; font-family: inherit; display: flex; align-items: center; gap: 5px; }
-.nav-tab:hover:not(.active) { color: var(--text); background: rgba(0,0,0,.04); }
-.nav-tab.active { background: var(--surface); color: var(--text); box-shadow: var(--shadow); font-weight: 600; }
-.nav-tab .tab-badge { background: var(--danger); color: #fff; border-radius: 10px; padding: 1px 5px; font-size: 9px; font-weight: 700; }
-.topbar-right { display: flex; align-items: center; gap: 10px; }
-.avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--accent-light); color: var(--accent-mid); font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; cursor: pointer; }
-.notif-btn { width: 34px; height: 34px; background: var(--surface2); border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer; position: relative; border: 1px solid var(--border); transition: background .15s; }
-.notif-btn:hover { background: var(--surface3); }
-.notif-dot { position: absolute; top: 6px; right: 6px; width: 6px; height: 6px; background: var(--danger); border-radius: 50%; border: 1.5px solid var(--surface); }
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.65;
+}
 
-/* ── SCREENS ── */
-.screen { display: none; }
-.screen.active { display: block; }
-.page-inner { max-width: 1200px; margin: 0 auto; padding: 24px 28px 80px; }
-@keyframes fadeUp { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
-.screen.active .page-inner > * { animation: fadeUp .22s ease both; }
-.screen.active .page-inner > *:nth-child(1) { animation-delay:.02s; }
-.screen.active .page-inner > *:nth-child(2) { animation-delay:.06s; }
-.screen.active .page-inner > *:nth-child(3) { animation-delay:.10s; }
-.screen.active .page-inner > *:nth-child(4) { animation-delay:.14s; }
-.screen.active .page-inner > *:nth-child(5) { animation-delay:.17s; }
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--paper); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
 
-/* ── LAYOUT ── */
-.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
-.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
-.flex { display: flex; }
-.flex-between { display: flex; align-items: center; justify-content: space-between; }
-.flex-center { display: flex; align-items: center; }
-.gap-4{gap:4px}.gap-6{gap:6px}.gap-8{gap:8px}.gap-10{gap:10px}.gap-12{gap:12px}.gap-16{gap:16px}
-.mt-8{margin-top:8px}.mt-12{margin-top:12px}.mt-16{margin-top:16px}.mt-20{margin-top:20px}
-.mb-8{margin-bottom:8px}.mb-12{margin-bottom:12px}.mb-16{margin-bottom:16px}.mb-20{margin-bottom:20px}
-.divider{border:none;border-top:1px solid var(--border);margin:14px 0}
-.fw-600{font-weight:600}.fw-700{font-weight:700}
-.text-sm{font-size:12px}.text-xs{font-size:11px}.text-muted{color:var(--text3)}.text-danger{color:var(--danger)}.text-warning{color:var(--warning)}.text-success{color:var(--accent-mid)}
-.mono{font-family:'DM Mono',monospace}
-.section-label{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--text3);margin-bottom:10px}
-.page-title{font-size:22px;font-weight:700;letter-spacing:-.5px}
-.page-sub{font-size:13px;color:var(--text3);margin-top:3px}
+/* ── NAV ── */
+.sidenav {
+  position: fixed;
+  left: 0; top: 0; bottom: 0;
+  width: 230px;
+  background: var(--ink);
+  padding: 28px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 100;
+  overflow-y: auto;
+}
+.nav-brand {
+  font-family: 'Fraunces', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -.3px;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.nav-brand-mark {
+  width: 28px; height: 28px;
+  background: var(--green);
+  border-radius: 7px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px;
+}
+.nav-sub {
+  font-size: 10px;
+  color: rgba(255,255,255,.35);
+  letter-spacing: .8px;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  font-family: 'DM Mono', monospace;
+}
+.nav-section {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.3);
+  margin: 14px 0 5px 4px;
+  font-family: 'DM Mono', monospace;
+}
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255,255,255,.55);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all .15s;
+}
+.nav-link:hover { background: rgba(255,255,255,.08); color: #fff; }
+.nav-link.active { background: rgba(255,255,255,.12); color: #fff; }
+.nav-link .dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.25);
+  flex-shrink: 0;
+}
+.nav-link.active .dot { background: var(--green); }
 
-/* ── CARDS ── */
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:18px;box-shadow:var(--shadow)}
-.card-flush{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow);overflow:hidden}
+/* verdict pill in nav */
+.nav-verdict {
+  margin-top: auto;
+  padding: 14px;
+  background: var(--verdict-yes-bg);
+  border-radius: var(--r);
+  text-align: center;
+}
+.nv-label { font-size: 10px; font-weight: 700; letter-spacing: .8px; text-transform: uppercase; color: var(--verdict-yes); margin-bottom: 4px; }
+.nv-score { font-family: 'Fraunces', serif; font-size: 34px; font-weight: 700; color: var(--verdict-yes); line-height: 1; }
+.nv-sub { font-size: 11px; color: var(--verdict-yes); margin-top: 3px; }
 
-/* ── STAT CARDS ── */
-.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow);position:relative;overflow:hidden}
-.stat-card-accent{border-left:3px solid var(--accent)}
-.stat-card-danger{border-left:3px solid var(--danger)}
-.stat-card-warning{border-left:3px solid var(--warning)}
-.stat-card-info{border-left:3px solid var(--info)}
-.stat-label{font-size:11px;font-weight:600;letter-spacing:.5px;color:var(--text3);text-transform:uppercase;margin-bottom:4px}
-.stat-value{font-size:28px;font-weight:700;letter-spacing:-.8px;line-height:1}
-.stat-delta{font-size:11px;margin-top:5px;display:flex;align-items:center;gap:3px}
-.delta-bad{color:var(--danger)}
-.delta-good{color:var(--accent)}
-.stat-action{font-size:11px;font-weight:600;color:var(--accent);cursor:pointer;margin-top:6px;display:inline-block;text-decoration:underline;text-underline-offset:2px}
+/* ── MAIN ── */
+.main { margin-left: 230px; padding: 0 48px 100px; max-width: calc(900px + 230px); }
+.section { padding-top: 60px; }
 
-/* ── BADGES ── */
-.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:5px;font-size:11px;font-weight:600}
-.badge-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
-.badge-success{background:var(--accent-light);color:var(--accent-mid)}
-.badge-danger{background:var(--danger-light);color:var(--danger)}
-.badge-warning{background:var(--warning-light);color:var(--warning)}
-.badge-info{background:var(--info-light);color:var(--info)}
-.badge-purple{background:var(--purple-light);color:var(--purple)}
-.badge-neutral{background:var(--surface2);color:var(--text2)}
+/* ── HERO ── */
+.hero {
+  padding: 60px 0 44px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 0;
+}
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--green-light);
+  color: var(--green-mid);
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  font-family: 'DM Mono', monospace;
+}
+.hero h1 {
+  font-family: 'Fraunces', serif;
+  font-size: 48px;
+  font-weight: 700;
+  letter-spacing: -1.5px;
+  line-height: 1.1;
+  color: var(--ink);
+  margin-bottom: 14px;
+}
+.hero h1 em { font-style: italic; color: var(--green); }
+.hero-sub {
+  font-size: 16px;
+  color: var(--ink3);
+  max-width: 560px;
+  line-height: 1.6;
+}
+.hero-meta {
+  display: flex;
+  gap: 28px;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+.hero-meta-item { display: flex; flex-direction: column; gap: 2px; }
+.hm-label { font-size: 10px; font-weight: 700; color: var(--ink3); text-transform: uppercase; letter-spacing: .7px; font-family: 'DM Mono', monospace; }
+.hm-val { font-size: 14px; font-weight: 600; color: var(--ink); }
 
-/* ── BUTTONS ── */
-.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 15px;border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;transition:all .15s;border:1.5px solid var(--border2);background:var(--surface);color:var(--text);font-family:inherit;line-height:1}
-.btn:focus-visible{outline:none;box-shadow:var(--focus-ring)}
-.btn:hover{background:var(--surface2)}
-.btn-primary{background:var(--accent);color:#fff;border-color:var(--accent)}
-.btn-primary:hover{background:var(--accent-mid);border-color:var(--accent-mid)}
-.btn-danger{background:var(--danger-light);color:var(--danger);border-color:var(--danger)}
-.btn-danger:hover{background:var(--danger);color:#fff}
-.btn-ghost{background:transparent;border-color:transparent;color:var(--text2)}
-.btn-ghost:hover{background:var(--surface2);color:var(--text)}
-.btn-sm{padding:6px 12px;font-size:12px}
-.btn-xs{padding:4px 10px;font-size:11px}
-.btn-icon{width:32px;height:32px;padding:0;justify-content:center}
+/* ── VERDICT BOX ── */
+.verdict-box {
+  background: var(--verdict-yes-bg);
+  border: 2px solid #A8D5BC;
+  border-radius: var(--r-lg);
+  padding: 28px 32px;
+  margin: 40px 0;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+.verdict-icon {
+  width: 72px; height: 72px;
+  background: var(--green);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 32px;
+  flex-shrink: 0;
+}
+.verdict-label { font-size: 11px; font-weight: 700; color: var(--green-mid); text-transform: uppercase; letter-spacing: .8px; margin-bottom: 4px; font-family: 'DM Mono', monospace; }
+.verdict-title { font-family: 'Fraunces', serif; font-size: 26px; font-weight: 700; color: var(--green-mid); letter-spacing: -.5px; line-height: 1.2; }
+.verdict-body { font-size: 14px; color: var(--green-mid); margin-top: 6px; line-height: 1.55; opacity: .8; }
 
-/* ── INPUTS ── */
-.input,.select,.textarea{width:100%;padding:9px 12px;border:1.5px solid var(--border2);border-radius:8px;font-size:13px;font-family:inherit;color:var(--text);background:var(--surface);outline:none;transition:border-color .15s}
-.input:focus,.select:focus,.textarea:focus{border-color:var(--accent);box-shadow:var(--focus-ring)}
-.input::placeholder,.textarea::placeholder{color:var(--text3)}
-.textarea{resize:vertical;min-height:80px;line-height:1.6}
-.input-group{margin-bottom:14px}
-.input-label{display:block;font-size:12px;font-weight:600;color:var(--text2);margin-bottom:5px}
-.input-hint{font-size:11px;color:var(--text3);margin-top:4px}
-.input-error{font-size:11px;color:var(--danger);margin-top:4px;display:flex;align-items:center;gap:4px}
+/* ── SCORE GRID ── */
+.score-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 24px 0;
+}
+.score-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 18px;
+  position: relative;
+  overflow: hidden;
+}
+.score-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+}
+.score-card.high::after { background: var(--green); }
+.score-card.med::after { background: var(--amber); }
+.score-card.low::after { background: var(--red); }
+.sc-label { font-size: 10px; font-weight: 700; color: var(--ink3); text-transform: uppercase; letter-spacing: .6px; margin-bottom: 6px; font-family: 'DM Mono', monospace; }
+.sc-score { font-family: 'Fraunces', serif; font-size: 36px; font-weight: 700; line-height: 1; letter-spacing: -1px; }
+.sc-score.high { color: var(--green); }
+.sc-score.med { color: var(--amber); }
+.sc-score.low { color: var(--red); }
+.sc-note { font-size: 12px; color: var(--ink3); margin-top: 5px; }
+.sc-bar { height: 4px; background: var(--border); border-radius: 2px; margin-top: 10px; overflow: hidden; }
+.sc-fill { height: 100%; border-radius: 2px; transition: width 1s ease; }
+.sc-fill.high { background: var(--green); }
+.sc-fill.med { background: var(--amber); }
+.sc-fill.low { background: var(--red); }
 
-/* ── FILTER CHIPS ── */
-.filter-chips{display:flex;gap:6px;flex-wrap:wrap}
-.chip{padding:5px 12px;border-radius:20px;font-size:12px;font-weight:500;border:1.5px solid var(--border2);background:var(--surface);cursor:pointer;color:var(--text2);transition:all .15s;display:inline-flex;align-items:center;gap:5px}
-.chip:hover{background:var(--surface2);color:var(--text);border-color:var(--border2)}
-.chip:focus-visible{outline:none;box-shadow:var(--focus-ring)}
-.chip.active{background:var(--text);color:#fff;border-color:var(--text)}
-.chip.chip-danger.active{background:var(--danger);border-color:var(--danger)}
-.chip-count{font-size:10px;font-weight:700;font-family:'DM Mono',monospace}
-.chip.active .chip-count{background:rgba(255,255,255,.2);padding:1px 4px;border-radius:4px}
-.chip:not(.active) .chip-count{color:var(--text3)}
+/* ── SECTION HEADING ── */
+.section-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid var(--ink);
+}
+.sh-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--ink3);
+  padding-top: 6px;
+  flex-shrink: 0;
+}
+.sh-text h2 {
+  font-family: 'Fraunces', serif;
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: -.8px;
+  color: var(--ink);
+  line-height: 1.1;
+}
+.sh-text p {
+  font-size: 14px;
+  color: var(--ink3);
+  margin-top: 4px;
+}
 
-/* ── CERT PILLS ── */
-.cert-pill{display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border-radius:4px;font-size:10px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:.2px}
-.cert-ok{background:var(--accent-light);color:var(--accent-mid)}
-.cert-exp{background:var(--danger-light);color:var(--danger)}
-.cert-warn{background:var(--warning-light);color:var(--warning)}
+/* ── PROSE ── */
+.prose { max-width: 720px; }
+.prose p { margin-bottom: 14px; color: var(--ink2); font-size: 15px; line-height: 1.7; }
+.prose strong { color: var(--ink); font-weight: 600; }
+.prose h3 { font-family: 'Fraunces', serif; font-size: 20px; font-weight: 600; color: var(--ink); margin: 28px 0 10px; letter-spacing: -.3px; }
 
-/* ── RISK CHIP ── */
-.risk-chip{display:inline-flex;align-items:center;gap:5px;padding:3px 8px;border-radius:5px;font-size:11px;font-weight:700}
-.risk-chip-icon{font-size:8px}
-.risk-low{background:var(--accent-light);color:var(--accent-mid)}
-.risk-med{background:var(--warning-light);color:var(--warning)}
-.risk-high{background:var(--danger-light);color:var(--danger)}
+/* ── CALLOUT ── */
+.callout {
+  border-left: 3px solid;
+  padding: 14px 18px;
+  border-radius: 0 var(--r) var(--r) 0;
+  margin: 20px 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.callout-green { border-color: var(--green); background: var(--green-light); color: var(--green-mid); }
+.callout-red { border-color: var(--red); background: var(--red-light); color: var(--red); }
+.callout-amber { border-color: var(--amber); background: var(--amber-light); color: var(--amber); }
+.callout-blue { border-color: var(--blue); background: var(--blue-light); color: var(--blue); }
+.callout strong { font-weight: 700; }
 
-/* ── SLA BAR ── */
-.sla-bar-wrap{background:var(--surface2);border-radius:4px;height:5px;overflow:hidden}
-.sla-bar{height:100%;border-radius:4px;transition:width .3s}
-.sla-ok{background:var(--accent)}
-.sla-warn{background:var(--warning)}
-.sla-breach{background:var(--danger)}
-.sla-badge{display:inline-flex;align-items:center;gap:4px;padding:2px 7px;border-radius:4px;font-size:10px;font-weight:700;font-family:'DM Mono',monospace}
-.sla-ok-b{background:var(--accent-light);color:var(--accent-mid)}
-.sla-warn-b{background:var(--warning-light);color:var(--warning)}
-.sla-breach-b{background:var(--danger-light);color:var(--danger)}
+/* ── FEATURE ANALYSIS ── */
+.feature-list { display: flex; flex-direction: column; gap: 10px; margin: 20px 0; }
+.feature-item {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 16px 18px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+.fi-badge {
+  padding: 3px 9px;
+  border-radius: 5px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  flex-shrink: 0;
+  font-family: 'DM Mono', monospace;
+  margin-top: 2px;
+}
+.fi-badge-strong { background: var(--green-light); color: var(--green-mid); }
+.fi-badge-gap { background: var(--amber-light); color: var(--amber); }
+.fi-badge-missing { background: var(--red-light); color: var(--red); }
+.fi-title { font-weight: 600; font-size: 14px; color: var(--ink); margin-bottom: 3px; }
+.fi-desc { font-size: 13px; color: var(--ink3); line-height: 1.5; }
 
-/* ── ACTION BANNER ── */
-.action-banner{background:var(--text);color:#fff;border-radius:var(--radius-lg);padding:18px 22px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;gap:16px}
-.banner-icon{width:40px;height:40px;background:rgba(255,255,255,.12);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
-.banner-title{font-size:15px;font-weight:700;color:#fff}
-.banner-sub{font-size:12px;color:rgba(255,255,255,.55);margin-top:2px}
-.banner-actions{display:flex;gap:8px;flex-shrink:0}
-.banner-btn{padding:8px 15px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;border:none;transition:all .15s}
-.banner-btn-primary{background:#fff;color:var(--text)}
-.banner-btn-primary:hover{background:#eee}
-.banner-btn-ghost{background:rgba(255,255,255,.12);color:#fff;border:1.5px solid rgba(255,255,255,.22)}
-.banner-btn-ghost:hover{background:rgba(255,255,255,.2)}
+/* ── DESIGN SYSTEM ── */
+.ds-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
+.ds-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 18px;
+}
+.ds-card-title { font-size: 11px; font-weight: 700; color: var(--ink3); text-transform: uppercase; letter-spacing: .7px; margin-bottom: 12px; font-family: 'DM Mono', monospace; }
 
-/* ── ENHANCED AI BOX ── */
-.ai-box{background:#fff;border:1.5px solid #C4DDD5;border-radius:var(--radius-lg);padding:14px 16px;margin-bottom:16px;position:relative;overflow:hidden}
-.ai-box::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),#4A9EDA,var(--purple))}
-.ai-box-header{display:flex;align-items:center;gap:8px;margin-bottom:8px}
-.ai-icon{width:20px;height:20px;background:var(--accent);border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;color:#fff}
-.ai-label{font-size:10px;font-weight:800;letter-spacing:.8px;color:var(--accent-mid);text-transform:uppercase}
-.ai-confidence{margin-left:auto;font-size:10px;font-weight:700;color:var(--text3)}
-.ai-text{font-size:13px;color:var(--text);line-height:1.55;margin-bottom:10px}
-.ai-reasoning{background:var(--surface2);border-radius:7px;padding:9px 11px;font-size:11px;color:var(--text2);line-height:1.5;margin-bottom:10px}
-.ai-reasoning-label{font-weight:700;color:var(--text2);display:block;margin-bottom:3px}
-.ai-meta{display:flex;gap:12px;margin-bottom:10px}
-.ai-meta-item{display:flex;align-items:center;gap:5px;font-size:11px;font-weight:600}
-.ai-meta-label{color:var(--text3);font-weight:400}
-.ai-actions{display:flex;gap:6px;flex-wrap:wrap}
-.ai-btn{padding:5px 12px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s;border:1.5px solid}
-.ai-btn-primary{background:var(--accent);color:#fff;border-color:var(--accent)}
-.ai-btn-primary:hover{background:var(--accent-mid)}
-.ai-btn-secondary{background:var(--surface);color:var(--text2);border-color:var(--border2)}
-.ai-btn-secondary:hover{background:var(--surface2)}
-.ai-btn-dismiss{background:transparent;color:var(--text3);border-color:transparent;font-size:11px}
-.ai-btn-dismiss:hover{color:var(--text2)}
+/* color swatches */
+.swatch-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 6px; }
+.swatch {
+  width: 36px; height: 36px;
+  border-radius: 7px;
+  border: 1px solid rgba(0,0,0,.08);
+  cursor: default;
+  position: relative;
+}
+.swatch-label { font-size: 9px; color: var(--ink3); text-align: center; margin-top: 3px; font-family: 'DM Mono', monospace; }
 
-/* ── ESCALATION FLAG ── */
-.escalation-flag{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border-radius:9px;margin-bottom:8px;border:1.5px solid}
-.ef-sev-high{background:var(--danger-light);border-color:#F0B0B0}
-.ef-sev-med{background:var(--warning-light);border-color:#E8C070}
-.ef-icon{font-size:16px;flex-shrink:0;margin-top:1px}
-.ef-body{flex:1}
-.ef-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px}
-.ef-detail{font-size:12px;color:var(--text2);line-height:1.45}
-.ef-reason{font-size:11px;font-weight:600;padding:3px 8px;border-radius:4px;display:inline-flex;align-items:center;gap:3px;margin-top:5px}
-.ef-reason-high{background:var(--danger-light);color:var(--danger)}
-.ef-reason-med{background:var(--warning-light);color:var(--warning)}
-.ef-actions{display:flex;gap:6px;margin-top:8px}
+/* typography specimens */
+.type-specimen { margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+.type-specimen:last-child { border-bottom: none; margin-bottom: 0; }
+.ts-name { font-size: 10px; font-weight: 700; color: var(--ink3); text-transform: uppercase; letter-spacing: .6px; margin-bottom: 4px; font-family: 'DM Mono', monospace; }
+.ts-sample-display { font-family: 'Fraunces', serif; font-size: 24px; font-weight: 700; letter-spacing: -.5px; }
+.ts-sample-body { font-family: 'Outfit', sans-serif; font-size: 14px; line-height: 1.6; color: var(--ink2); }
+.ts-sample-mono { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--green-mid); }
+.ts-meta { font-size: 10px; color: var(--ink3); margin-top: 3px; font-family: 'DM Mono', monospace; }
 
-/* ── SUPPLIER TABLE v3 ── */
-.supplier-tbl{width:100%}
-.sup-header{display:grid;grid-template-columns:20px 24px 1fr 90px 80px 180px 80px 90px 110px;gap:10px;padding:9px 16px;border-bottom:1.5px solid var(--border);background:var(--surface2)}
-.sup-header span{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--text3)}
-.sup-row{display:grid;grid-template-columns:20px 24px 1fr 90px 80px 180px 80px 90px 110px;gap:10px;padding:13px 16px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .12s;align-items:center}
-.sup-row:last-child{border-bottom:none}
-.sup-row:hover{background:var(--bg)}
-.sup-row.selected{background:#EEF7F3;outline:2px solid var(--accent);outline-offset:-2px}
-.risk-bar-v{width:4px;border-radius:4px;align-self:stretch}
-.bar-high{background:var(--danger)}
-.bar-med{background:var(--warning)}
-.bar-low{background:var(--accent)}
-.sup-name{font-size:13px;font-weight:600;display:block;line-height:1.2}
-.sup-meta{font-size:10px;color:var(--text3);margin-top:3px;line-height:1.4}
-.sup-insight{font-size:10px;color:var(--danger);font-weight:600;display:flex;align-items:center;gap:3px;margin-top:3px}
-.sup-action-pending{font-size:10px;color:var(--warning);font-weight:600;margin-top:2px}
-.sup-last-resp{font-size:11px;font-weight:600}
-.resp-late{color:var(--danger)}
-.resp-ok{color:var(--text3)}
-.cat-tag{background:var(--surface2);color:var(--text2);font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;border:1px solid var(--border)}
+/* spacing scale */
+.spacing-row { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+.spacing-box { background: var(--green-light); border: 1px solid #A8D5BC; border-radius: 3px; height: 12px; }
+.spacing-label { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--ink3); }
 
-/* row checkbox */
-.row-checkbox{width:16px;height:16px;border-radius:4px;border:1.5px solid var(--border2);cursor:pointer;appearance:none;-webkit-appearance:none;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:var(--surface);transition:all .12s}
-.row-checkbox:checked{background:var(--accent);border-color:var(--accent)}
-.row-checkbox:checked::after{content:'✓';color:#fff;font-size:10px;font-weight:700;position:absolute}
-.row-checkbox:focus-visible{box-shadow:var(--focus-ring)}
-.row-checkbox:hover:not(:checked){border-color:var(--accent)}
+/* component showcase */
+.comp-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 10px; }
+.badge { display: inline-flex; align-items: center; gap: 4px; padding: 3px 9px; border-radius: 5px; font-size: 11px; font-weight: 600; }
+.badge-g { background: var(--green-light); color: var(--green-mid); }
+.badge-r { background: var(--red-light); color: var(--red); }
+.badge-a { background: var(--amber-light); color: var(--amber); }
+.badge-b { background: var(--blue-light); color: var(--blue); }
+.badge-n { background: #EDEAE4; color: #5E5B55; }
+.btn-demo { padding: 7px 14px; border-radius: 8px; font-size: 12px; font-weight: 600; border: 1.5px solid; cursor: default; font-family: 'Outfit', sans-serif; }
+.btn-primary-d { background: var(--green); color: #fff; border-color: var(--green); }
+.btn-secondary-d { background: #fff; color: var(--ink); border-color: #C8C3BB; }
+.btn-danger-d { background: var(--red-light); color: var(--red); border-color: var(--red); }
 
-/* ── BULK ACTION BAR ── */
-.bulk-bar{background:var(--text);color:#fff;border-radius:var(--radius);padding:10px 16px;display:flex;align-items:center;gap:12px;margin-bottom:12px;animation:fadeUp .18s ease}
-.bulk-bar-count{font-size:13px;font-weight:600;flex-shrink:0}
-.bulk-bar-divider{width:1px;height:20px;background:rgba(255,255,255,.2)}
-.bulk-btn{padding:6px 12px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;border:1.5px solid rgba(255,255,255,.25);background:rgba(255,255,255,.1);color:#fff;transition:all .15s}
-.bulk-btn:hover{background:rgba(255,255,255,.2)}
-.bulk-btn-danger{border-color:rgba(255,100,100,.4);background:rgba(200,50,50,.2);color:#FFC0C0}
-.bulk-close{margin-left:auto;background:transparent;border:none;color:rgba(255,255,255,.5);cursor:pointer;font-size:16px;padding:4px}
-.bulk-close:hover{color:#fff}
+/* ── UX HEURISTIC TABLE ── */
+.heuristic-table { width: 100%; border-collapse: collapse; margin: 20px 0; background: var(--white); border-radius: var(--r-lg); overflow: hidden; border: 1px solid var(--border); }
+.heuristic-table thead { background: var(--ink); color: #fff; }
+.heuristic-table th { padding: 11px 14px; font-size: 11px; font-weight: 700; text-align: left; letter-spacing: .5px; text-transform: uppercase; font-family: 'DM Mono', monospace; }
+.heuristic-table td { padding: 12px 14px; font-size: 13px; border-bottom: 1px solid var(--border); vertical-align: top; color: var(--ink2); }
+.heuristic-table tr:last-child td { border-bottom: none; }
+.heuristic-table tr:hover td { background: var(--paper); }
+.ht-name { font-weight: 600; color: var(--ink); }
+.ht-pass { color: var(--green); font-weight: 700; font-size: 12px; }
+.ht-fail { color: var(--red); font-weight: 700; font-size: 12px; }
+.ht-part { color: var(--amber); font-weight: 700; font-size: 12px; }
 
-/* ── SMART ACTIONS ── */
-.smart-actions{display:flex;gap:8px;flex-wrap:wrap;padding:12px 16px;background:var(--surface2);border-top:1px solid var(--border)}
-.smart-btn{display:inline-flex;align-items:center;gap:5px;padding:6px 12px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;border:1.5px solid var(--border2);background:var(--surface);color:var(--text2);transition:all .15s;font-family:inherit}
-.smart-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+/* ── JOURNEY MAP ── */
+.journey { display: flex; gap: 0; margin: 20px 0; overflow-x: auto; }
+.journey-step {
+  flex: 1;
+  min-width: 130px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-right: none;
+  padding: 14px 12px;
+  position: relative;
+}
+.journey-step:first-child { border-radius: var(--r) 0 0 var(--r); }
+.journey-step:last-child { border-right: 1px solid var(--border); border-radius: 0 var(--r) var(--r) 0; }
+.js-num { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--ink3); margin-bottom: 6px; }
+.js-title { font-weight: 700; font-size: 13px; color: var(--ink); margin-bottom: 6px; }
+.js-desc { font-size: 11px; color: var(--ink3); line-height: 1.4; margin-bottom: 10px; }
+.js-feel { font-size: 18px; text-align: center; }
+.js-sentiment { font-size: 10px; text-align: center; font-weight: 700; margin-top: 2px; font-family: 'DM Mono', monospace; }
+.js-sent-pos { color: var(--green); }
+.js-sent-neg { color: var(--red); }
+.js-sent-neu { color: var(--amber); }
+.js-pain { font-size: 10px; color: var(--red); margin-top: 6px; padding: 4px 6px; background: var(--red-light); border-radius: 4px; }
 
-/* ── QUERY TABLE ── */
-.qr-row{display:grid;grid-template-columns:20px 4px 1fr 100px 80px 140px 90px 110px;gap:10px;padding:13px 16px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .12s;align-items:center}
-.qr-row:hover{background:var(--bg)}
-.qr-header{display:grid;grid-template-columns:20px 4px 1fr 100px 80px 140px 90px 110px;gap:10px;padding:9px 16px;border-bottom:1.5px solid var(--border);background:var(--surface2)}
-.qr-header span{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--text3)}
-.pt{display:flex;align-items:center;gap:2px}
-.pt-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.pt-line{flex:1;height:2px;border-radius:2px;min-width:8px}
-.pt-done .pt-dot{background:var(--accent)}.pt-done .pt-line{background:var(--accent)}
-.pt-active .pt-dot{background:var(--warning);box-shadow:0 0 0 3px var(--warning-light)}.pt-active .pt-line{background:var(--border)}
-.pt-pending .pt-dot{background:var(--border2)}.pt-pending .pt-line{background:var(--border)}
-.pt-breach .pt-dot{background:var(--danger)}.pt-breach .pt-line{background:var(--danger)}
-
-/* ── PROGRESS TRACK ── */
-.progress-track-v3{display:flex;align-items:center;gap:0;margin:14px 0}
-.ptv3-step{display:flex;flex-direction:column;align-items:center;gap:5px;flex:1;position:relative}
-.ptv3-step::after{content:'';position:absolute;top:14px;left:50%;width:100%;height:2px;background:var(--border)}
-.ptv3-step:last-child::after{display:none}
-.ptv3-line-done::after{background:var(--accent)}
-.ptv3-dot{width:28px;height:28px;border-radius:50%;z-index:1;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;border:2px solid var(--border)}
-.ptv3-dot-done{background:var(--accent);border-color:var(--accent);color:#fff}
-.ptv3-dot-active{background:#fff;border-color:var(--warning);color:var(--warning);box-shadow:0 0 0 4px var(--warning-light)}
-.ptv3-dot-pending{background:var(--surface2);border-color:var(--border2);color:var(--text3)}
-.ptv3-label{font-size:10px;font-weight:600;color:var(--text3);text-align:center}
-.ptv3-label-active{color:var(--warning)}
-.ptv3-label-done{color:var(--accent)}
-.ptv3-time{font-size:9px;color:var(--text3);font-family:'DM Mono',monospace}
-
-/* ── CHAT ── */
-.chat-wrap{display:flex;flex-direction:column;gap:14px;max-height:380px;overflow-y:auto;padding-right:4px}
-.chat-bw{display:flex;gap:8px;align-items:flex-start}
-.chat-bw.right{flex-direction:row-reverse}
-.chat-av{width:30px;height:30px;border-radius:50%;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.av-qa{background:var(--accent-light);color:var(--accent-mid)}
-.av-sup{background:var(--info-light);color:var(--info)}
-.av-sys{background:var(--surface3);color:var(--text3);font-size:14px}
-.chat-bubble{max-width:76%;padding:10px 13px;border-radius:12px;font-size:13px;line-height:1.55}
-.bubble-qa{background:var(--surface2);border-radius:3px 12px 12px 12px}
-.bubble-sup{background:var(--accent);color:#fff;border-radius:12px 3px 12px 12px}
-.bubble-sys{background:transparent;border:1px solid var(--border);border-radius:8px;color:var(--text3);font-size:11px;font-style:italic;padding:7px 11px;max-width:100%}
-.bubble-meta{font-size:10px;color:var(--text3);margin-top:3px}
-.doc-attach{display:flex;align-items:center;gap:7px;padding:7px 10px;border-radius:7px;margin-top:7px;font-size:11px;cursor:pointer;border:1px solid;transition:all .12s}
-.doc-attach-qa{background:var(--surface);border-color:var(--border)}
-.doc-attach-sup{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.3)}
-.doc-icon{width:24px;height:24px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
-.compose-bar{display:flex;gap:8px;align-items:flex-end;margin-top:14px;padding-top:14px;border-top:1px solid var(--border)}
-.compose-input{flex:1;padding:9px 13px;border:1.5px solid var(--border2);border-radius:9px;font-size:13px;font-family:inherit;resize:none;min-height:40px;outline:none;background:var(--surface)}
-.compose-input:focus{border-color:var(--accent);box-shadow:var(--focus-ring)}
+/* ── OPPORTUNITY ── */
+.opp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 20px 0; }
+.opp-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 18px;
+  border-top: 3px solid;
+}
+.opp-card.opp-high { border-top-color: var(--red); }
+.opp-card.opp-med { border-top-color: var(--amber); }
+.opp-card.opp-low { border-top-color: var(--green); }
+.opp-priority { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .6px; margin-bottom: 6px; font-family: 'DM Mono', monospace; }
+.opp-high .opp-priority { color: var(--red); }
+.opp-med .opp-priority { color: var(--amber); }
+.opp-low .opp-priority { color: var(--green); }
+.opp-title { font-weight: 700; font-size: 14px; color: var(--ink); margin-bottom: 6px; }
+.opp-desc { font-size: 12px; color: var(--ink3); line-height: 1.5; }
 
 /* ── TIMELINE ── */
-.timeline-step{display:flex;gap:10px;align-items:flex-start;padding-bottom:18px;position:relative}
-.timeline-step::before{content:'';position:absolute;left:13px;top:28px;bottom:0;width:1px;background:var(--border)}
-.timeline-step:last-child::before{display:none}
-.ts-dot{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;position:relative;z-index:1;font-weight:700}
-.ts-done{background:var(--accent);color:#fff}
-.ts-active{background:var(--warning-light);color:var(--warning);border:2px solid var(--warning)}
-.ts-pending{background:var(--surface2);color:var(--text3);border:1.5px solid var(--border2)}
-.ts-system{background:var(--purple-light);color:var(--purple);font-size:12px}
-.ts-body strong{font-size:12px;font-weight:600;display:block;line-height:1.3}
-.ts-body span{font-size:11px;color:var(--text3)}
+.timeline { position: relative; padding-left: 24px; margin: 20px 0; }
+.timeline::before { content: ''; position: absolute; left: 7px; top: 8px; bottom: 8px; width: 2px; background: var(--border); }
+.tl-item { position: relative; margin-bottom: 20px; }
+.tl-dot { position: absolute; left: -24px; top: 5px; width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--white); box-shadow: 0 0 0 2px; }
+.tl-dot-green { background: var(--green); box-shadow-color: var(--green); }
+.tl-label { font-size: 10px; font-weight: 700; color: var(--ink3); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 3px; font-family: 'DM Mono', monospace; }
+.tl-title { font-weight: 600; font-size: 14px; color: var(--ink); margin-bottom: 4px; }
+.tl-desc { font-size: 13px; color: var(--ink3); line-height: 1.5; }
 
-/* ── FORM ── */
-.template-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
-.template-card{padding:12px;border:1.5px solid var(--border);border-radius:var(--radius);cursor:pointer;transition:all .15s;background:var(--surface)}
-.template-card:hover,.template-card.selected{border-color:var(--accent);background:var(--accent-light)}
-.tc-icon{width:30px;height:30px;border-radius:8px;background:var(--surface2);display:flex;align-items:center;justify-content:center;font-size:15px;margin-bottom:8px}
-.template-card.selected .tc-icon{background:var(--accent);color:#fff}
-.tc-title{font-size:11px;font-weight:600;color:var(--text)}
-.tc-desc{font-size:10px;color:var(--text3);margin-top:2px;line-height:1.4}
-.priority-opts{display:flex;gap:7px}
-.priority-opt{flex:1;padding:9px 8px;border:1.5px solid var(--border);border-radius:8px;text-align:center;cursor:pointer;font-size:12px;font-weight:600;transition:all .15s;background:var(--surface)}
-.priority-opt.sel-low{border-color:var(--accent);background:var(--accent-light);color:var(--accent-mid)}
-.priority-opt.sel-med{border-color:var(--warning);background:var(--warning-light);color:var(--warning)}
-.priority-opt.sel-high{border-color:var(--danger);background:var(--danger-light);color:var(--danger)}
-.upload-zone{border:2px dashed var(--border2);border-radius:var(--radius);padding:20px;text-align:center;cursor:pointer;transition:all .15s;background:var(--surface2)}
-.upload-zone:hover{border-color:var(--accent);background:var(--accent-light)}
+/* ── IMPACT ── */
+.impact-row { display: flex; gap: 12px; margin: 20px 0; }
+.impact-item { flex: 1; background: var(--white); border: 1px solid var(--border); border-radius: var(--r); padding: 16px; text-align: center; }
+.ii-val { font-family: 'Fraunces', serif; font-size: 32px; font-weight: 700; letter-spacing: -1px; color: var(--green); }
+.ii-label { font-size: 12px; color: var(--ink3); margin-top: 3px; }
 
-/* ── SYSTEM FEEDBACK ── */
-.toast{position:fixed;bottom:24px;right:24px;background:var(--text);color:#fff;border-radius:10px;padding:12px 18px;font-size:13px;font-weight:500;display:flex;align-items:center;gap:10px;box-shadow:var(--shadow-md);z-index:9999;transform:translateY(80px);opacity:0;transition:all .3s cubic-bezier(.16,1,.3,1)}
-.toast.show{transform:translateY(0);opacity:1}
-.toast-icon{font-size:16px}
-.toast-success{background:var(--accent)}
-.toast-error{background:var(--danger)}
-.loading-skeleton{background:linear-gradient(90deg,var(--surface2) 25%,var(--surface3) 50%,var(--surface2) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:6px}
-@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
-.empty-state{padding:52px 24px;text-align:center}
-.empty-icon{font-size:40px;margin-bottom:14px;opacity:.35}
-.empty-title{font-size:15px;font-weight:600;color:var(--text)}
-.empty-sub{font-size:12px;color:var(--text3);margin-top:5px;margin-bottom:18px;max-width:260px;margin-left:auto;margin-right:auto}
-.success-state{padding:40px 24px;text-align:center;background:var(--accent-light);border-radius:var(--radius)}
-.error-inline{background:var(--danger-light);border:1.5px solid var(--danger);border-radius:8px;padding:10px 13px;font-size:12px;color:var(--danger);display:flex;align-items:center;gap:8px;margin-bottom:12px}
+/* ── INTERVIEW READINESS ── */
+.readiness-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 20px 0; }
+.rg-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.rg-icon { font-size: 22px; }
+.rg-title { font-weight: 700; font-size: 13px; color: var(--ink); }
+.rg-verdict { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 700; font-family: 'DM Mono', monospace; text-transform: uppercase; }
+.rg-yes { background: var(--green-light); color: var(--green-mid); }
+.rg-part { background: var(--amber-light); color: var(--amber); }
+.rg-no { background: var(--red-light); color: var(--red); }
+.rg-desc { font-size: 12px; color: var(--ink3); line-height: 1.45; }
 
-/* ── SIDEBAR ── */
-.insight-row{display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border)}
-.insight-row:last-child{border-bottom:none}
-.insight-label{font-size:11px;color:var(--text3)}
-.insight-value{font-size:11px;font-weight:600}
-.compliance-trend{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--surface2);border-radius:var(--radius);margin-bottom:10px}
+/* ── FOOTER ── */
+.doc-footer {
+  margin-top: 60px;
+  padding: 24px 0;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.df-left { font-family: 'Fraunces', serif; font-size: 18px; font-weight: 600; color: var(--ink3); letter-spacing: -.3px; }
+.df-right { font-size: 12px; color: var(--ink3); font-family: 'DM Mono', monospace; }
 
-/* ── NOTIFICATION PANEL ── */
-.notif-panel{position:absolute;top:58px;right:16px;width:330px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-md);z-index:300;display:none}
-.notif-panel.open{display:block}
-.notif-item{padding:12px 14px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .1s;display:flex;gap:10px;align-items:flex-start}
-.notif-item:hover{background:var(--surface2)}
-.notif-item:last-child{border-bottom:none}
-.notif-dot-item{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:5px}
-.notif-text{font-size:12px;color:var(--text);line-height:1.45}
-.notif-time{font-size:10px;color:var(--text3);margin-top:2px}
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .sidenav { display: none; }
+  .main { margin-left: 0; padding: 0 20px 60px; }
+  .score-grid, .ds-grid, .opp-grid, .readiness-grid { grid-template-columns: 1fr 1fr; }
+  .impact-row { flex-wrap: wrap; }
+  .hero h1 { font-size: 32px; }
+}
 
-/* ── FORM PREVIEW CARD ── */
-.preview-block{background:var(--surface2);border-radius:8px;padding:12px 14px;margin-bottom:12px}
-.preview-row{display:flex;align-items:flex-start;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border)}
-.preview-row:last-child{border-bottom:none}
-.preview-label{font-size:11px;color:var(--text3);flex-shrink:0}
-.preview-val{font-size:11px;font-weight:600;text-align:right}
-
-/* Search */
-.search-wrap{position:relative;flex:1;max-width:260px}
-.search-wrap svg{position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--text3)}
-.search-input{width:100%;padding:7px 10px 7px 30px;border:1.5px solid var(--border2);border-radius:7px;font-size:12px;font-family:inherit;outline:none;background:var(--surface);color:var(--text)}
-.search-input:focus{border-color:var(--accent);box-shadow:var(--focus-ring)}
-
-/* ── TOOLTIP (accessibility) ── */
-[data-tip]{position:relative}
-[data-tip]:hover::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);background:var(--text);color:#fff;font-size:11px;padding:4px 9px;border-radius:5px;white-space:nowrap;z-index:1000;pointer-events:none}
-
-/* ── PATTERN ACCESSIBILITY: non-color ── */
-.risk-chip-high::before{content:'▲ '}
-.risk-chip-med::before{content:'● '}
-.risk-chip-low::before{content:'▼ '}
+/* ── ANIMATE ── */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.animate { animation: fadeUp .4s ease both; }
 </style>
 </head>
 <body>
 
-<!-- TOAST -->
-<div class="toast" id="toast"><span class="toast-icon" id="toast-icon">✓</span><span id="toast-msg">Done!</span></div>
+<!-- SIDENAV -->
+<nav class="sidenav">
+  <div class="nav-brand">
+    <div class="nav-brand-mark">🛡</div>
+    SafeSource v3
+  </div>
+  <div class="nav-sub">UX Case Study</div>
 
-<!-- NOTIFICATION PANEL -->
-<div class="notif-panel" id="notif-panel">
-  <div style="padding:12px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
-    <span style="font-size:13px;font-weight:700;">Notifications</span>
-    <span style="font-size:11px;color:var(--accent);cursor:pointer;font-weight:600;" onclick="showToast('All notifications marked as read','✓')">Mark all read</span>
-  </div>
-  <div class="notif-item"><div class="notif-dot-item" style="background:var(--danger)"></div><div><div class="notif-text"><strong>PackRight Solutions</strong> — HACCP cert expired 8 days ago. 2 queries unanswered.</div><div class="notif-time">2 min ago · Auto-detected by Compliance Radar</div></div></div>
-  <div class="notif-item"><div class="notif-dot-item" style="background:var(--warning)"></div><div><div class="notif-text"><strong>QRY-2025-034</strong> SLA breach in 48 hours. Supplier last active 6 days ago.</div><div class="notif-time">1 hr ago · SLA Monitor</div></div></div>
-  <div class="notif-item"><div class="notif-dot-item" style="background:var(--accent)"></div><div><div class="notif-text"><strong>Orchard Farms</strong> responded to your HACCP query. Document attached — needs review.</div><div class="notif-time">3 hrs ago · Query thread</div></div></div>
-  <div class="notif-item"><div class="notif-dot-item" style="background:var(--purple)"></div><div><div class="notif-text">5 BRC certificates expire in the next 30 days. One bulk outreach could cover all five.</div><div class="notif-time">Today · Compliance Radar</div></div></div>
-</div>
+  <a href="#verdict" class="nav-link active"><div class="dot"></div> Interview Verdict</a>
+  <a href="#overview" class="nav-link"><div class="dot"></div> Project Overview</a>
 
-<!-- TOPBAR -->
-<div class="topbar">
-  <div class="logo">
-    <div class="logo-mark"><svg viewBox="0 0 16 16"><path d="M8 1L2 5v6l6 4 6-4V5L8 1z"/></svg></div>
-    SafeSource
+  <div class="nav-section">Analysis</div>
+  <a href="#casestudy" class="nav-link"><div class="dot"></div> Case Study</a>
+  <a href="#heuristics" class="nav-link"><div class="dot"></div> UX Heuristics</a>
+  <a href="#journey" class="nav-link"><div class="dot"></div> User Journey</a>
+  <a href="#focus" class="nav-link"><div class="dot"></div> UX Focus Areas</a>
+
+  <div class="nav-section">Design</div>
+  <a href="#designsystem" class="nav-link"><div class="dot"></div> Design System</a>
+  <a href="#opportunities" class="nav-link"><div class="dot"></div> Opportunities</a>
+  <a href="#summary" class="nav-link"><div class="dot"></div> Summary</a>
+
+  <div class="nav-verdict">
+    <div class="nv-label">Overall Score</div>
+    <div class="nv-score">8.2</div>
+    <div class="nv-sub">/ 10 — Interview Ready</div>
   </div>
-  <div class="nav-tabs">
-    <button class="nav-tab active" onclick="showScreen('dashboard')">Dashboard</button>
-    <button class="nav-tab" onclick="showScreen('raise')">Raise Query</button>
-    <button class="nav-tab" onclick="showScreen('tracking')">Query Tracker <span class="tab-badge">7</span></button>
-    <button class="nav-tab" onclick="showScreen('detail')">Query Detail</button>
-  </div>
-  <div class="topbar-right">
-    <div class="notif-btn" onclick="toggleNotif()" aria-label="Notifications" title="Notifications">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-      <div class="notif-dot"></div>
+</nav>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- HERO -->
+  <div class="hero animate">
+    <div class="hero-tag">✦ UX Portfolio Case Study</div>
+    <h1>SafeSource v3 —<br><em>Supplier Food Safety</em> Portal</h1>
+    <p class="hero-sub">A full UX analysis, design system documentation, heuristic evaluation, and interview readiness assessment of a food safety compliance B2B dashboard.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item"><div class="hm-label">Product Type</div><div class="hm-val">B2B SaaS Dashboard</div></div>
+      <div class="hero-meta-item"><div class="hm-label">Domain</div><div class="hm-val">Food Safety / Compliance</div></div>
+      <div class="hero-meta-item"><div class="hm-label">Primary User</div><div class="hm-val">QA Manager</div></div>
+      <div class="hero-meta-item"><div class="hm-label">Screens</div><div class="hm-val">4 (Dashboard, Raise, Track, Detail)</div></div>
+      <div class="hero-meta-item"><div class="hm-label">Version</div><div class="hm-val">v3 (Iterative)</div></div>
     </div>
-    <div class="avatar" title="Riya Kapoor — QA Manager">RK</div>
   </div>
-</div>
 
-
-<!-- ══════════════════════════════════════════════════
-     SCREEN 1: DASHBOARD v3
-══════════════════════════════════════════════════ -->
-<div id="screen-dashboard" class="screen active">
-<div class="page-inner">
-
-  <!-- IMPROVEMENT 1: Action Banner — clearer urgency, human copy -->
-  <div class="action-banner">
-    <div style="display:flex;align-items:center;gap:12px;">
-      <div class="banner-icon">⚡</div>
+  <!-- ═══════════════════════════════════ VERDICT -->
+  <div id="verdict" class="section">
+    <div class="verdict-box">
+      <div class="verdict-icon">✅</div>
       <div>
-        <div class="banner-title">3 things need action before end of day</div>
-        <div class="banner-sub">PackRight SLA breached 8d ago · Orchard HACCP expired · 1 new escalation awaiting you</div>
-      </div>
-    </div>
-    <div class="banner-actions">
-      <button class="banner-btn banner-btn-primary" onclick="showScreen('tracking')">See All Urgent Items →</button>
-      <button class="banner-btn banner-btn-ghost" onclick="showToast('Snoozed for 24 hours','⏰')">Snooze 24h</button>
-    </div>
-  </div>
-
-  <!-- IMPROVEMENT 3: Enhanced AI Suggestion — impact, confidence, reasoning -->
-  <div class="ai-box">
-    <div class="ai-box-header">
-      <div class="ai-icon">✦</div>
-      <span class="ai-label">Smart Suggestion</span>
-      <span class="ai-confidence">Confidence: 94%</span>
-    </div>
-    <div class="ai-text">
-      <strong>Escalate PackRight Solutions now</strong> — they've had 2 expired certificates and haven't opened your last query email in 8 days. 3 other suppliers share the same BRC auditor; a single bulk outreach could resolve all four simultaneously.
-    </div>
-    <div class="ai-reasoning">
-      <span class="ai-reasoning-label">Why this suggestion?</span>
-      Supplier hasn't responded in 8d (SLA = 7d) · HACCP + ISO both expired · Last audit grade dropped from B to C · Similar pattern preceded the 2023 PackRight NC incident. Bulk outreach saves ~47 min based on your avg. query time.
-    </div>
-    <div class="ai-meta">
-      <div class="ai-meta-item"><span class="ai-meta-label">Impact:</span> <span style="color:var(--danger)">High — affects 4 suppliers</span></div>
-      <div class="ai-meta-item"><span class="ai-meta-label">Time to act:</span> <span>~3 min</span></div>
-      <div class="ai-meta-item"><span class="ai-meta-label">Risk if ignored:</span> <span style="color:var(--danger)">Policy breach</span></div>
-    </div>
-    <div class="ai-actions">
-      <button class="ai-btn ai-btn-primary" onclick="showScreen('raise')">↑ Escalate PackRight Now</button>
-      <button class="ai-btn ai-btn-secondary" onclick="showToast('Bulk outreach drafted for 4 suppliers','📤')">📤 Draft Bulk Outreach</button>
-      <button class="ai-btn ai-btn-secondary" onclick="showScreen('detail')">View Details</button>
-      <button class="ai-btn ai-btn-dismiss" onclick="this.closest('.ai-box').style.display='none'">Dismiss ×</button>
-    </div>
-  </div>
-
-  <!-- KPI Strip — more action-oriented labels -->
-  <div class="grid-4 mb-20">
-    <div class="stat-card stat-card-accent">
-      <div class="stat-label">Active Suppliers</div>
-      <div class="stat-value">48</div>
-      <div class="stat-delta delta-good">+4 this quarter</div>
-    </div>
-    <div class="stat-card stat-card-danger">
-      <div class="stat-label">Queries Needing Action</div>
-      <div class="stat-value text-danger">19</div>
-      <div class="stat-delta delta-bad">▲ 6 past SLA deadline</div>
-      <span class="stat-action" onclick="showScreen('tracking')">Review overdue →</span>
-    </div>
-    <div class="stat-card stat-card-warning">
-      <div class="stat-label">Certificates Expired</div>
-      <div class="stat-value text-warning">7</div>
-      <div class="stat-delta delta-bad">▲ 3 new this week</div>
-      <span class="stat-action" onclick="showToast('Filtered to expired certs','🔍')">Send renewals →</span>
-    </div>
-    <div class="stat-card stat-card-info">
-      <div class="stat-label">Avg. Days to Resolve</div>
-      <div class="stat-value">11d</div>
-      <div class="stat-delta delta-bad">▲ +3d vs last month</div>
-      <span class="stat-action">See slow queries →</span>
-    </div>
-  </div>
-
-  <!-- IMPROVEMENT 2: Escalations — richer context, clear next action -->
-  <div class="mb-16">
-    <div class="flex-between mb-8">
-      <div class="section-label" style="margin:0">🚨 Escalations &amp; SLA Alerts</div>
-      <button class="btn btn-ghost btn-xs">View all alerts</button>
-    </div>
-
-    <!-- Flag 1: High severity — richer body -->
-    <div class="escalation-flag ef-sev-high">
-      <span class="ef-icon">🔴</span>
-      <div class="ef-body">
-        <div class="ef-title">PackRight Solutions — SLA breached 8 days ago</div>
-        <div class="ef-detail">2 expired certs (HACCP + ISO). Supplier hasn't opened your email since Apr 8. Your SLA policy requires escalation after 7 days. <strong>No action taken yet.</strong></div>
-        <span class="ef-reason ef-reason-high">Why high: 2 expired certs + no supplier response + audit grade C</span>
-        <div class="ef-actions">
-          <button class="btn btn-sm btn-danger" onclick="showToast('Escalation sent to QA Manager','🔺')">Escalate to QA Manager</button>
-          <button class="btn btn-sm" onclick="showToast('Reminder sent to PackRight Solutions','📧')">Send 48hr Ultimatum</button>
-          <button class="btn btn-sm btn-ghost" onclick="showScreen('detail')">View Query</button>
-        </div>
+        <div class="verdict-label">Interview Recommendation</div>
+        <div class="verdict-title">Yes — Select for Interview</div>
+        <div class="verdict-body">This portfolio piece demonstrates strong product thinking, a mature design system, real-world domain understanding, and clear UX decision-making. The work shows an 8.2/10 quality standard. A few gaps exist (mobile, empty states, accessibility depth), which are normal at this level and make great discussion points.</div>
       </div>
     </div>
 
-    <!-- Flag 2: Medium severity -->
-    <div class="escalation-flag ef-sev-med">
-      <span class="ef-icon">🟡</span>
-      <div class="ef-body">
-        <div class="ef-title">Orchard Farms — HACCP cert expired 12 days ago, doc not yet received</div>
-        <div class="ef-detail">Query open. Supplier acknowledged but hasn't uploaded the renewal. Due in <strong>3 days.</strong> Last message: "Certificate with auditor, expected soon."</div>
-        <span class="ef-reason ef-reason-med">Why medium: Supplier responsive but delaying document upload</span>
-        <div class="ef-actions">
-          <button class="btn btn-sm" onclick="showToast('Reminder sent to Orchard Farms','📧')">Send Reminder</button>
-          <button class="btn btn-sm btn-ghost" onclick="showScreen('detail')">View Thread</button>
-        </div>
+    <div class="score-grid">
+      <div class="score-card high">
+        <div class="sc-label">Visual Design</div>
+        <div class="sc-score high">9.0</div>
+        <div class="sc-note">Consistent tokens, great hierarchy, cohesive color system</div>
+        <div class="sc-bar"><div class="sc-fill high" style="width:90%"></div></div>
+      </div>
+      <div class="score-card high">
+        <div class="sc-label">Information Architecture</div>
+        <div class="sc-score high">8.5</div>
+        <div class="sc-note">Clear task flows, logical 4-screen structure, smart grouping</div>
+        <div class="sc-bar"><div class="sc-fill high" style="width:85%"></div></div>
+      </div>
+      <div class="score-card high">
+        <div class="sc-label">Domain Thinking</div>
+        <div class="sc-score high">9.5</div>
+        <div class="sc-note">Deep food safety knowledge evident — HACCP, BRC, SLA logic</div>
+        <div class="sc-bar"><div class="sc-fill high" style="width:95%"></div></div>
+      </div>
+      <div class="score-card med">
+        <div class="sc-label">Interaction Design</div>
+        <div class="sc-score med">7.5</div>
+        <div class="sc-note">Good micro-interactions but some affordances unclear</div>
+        <div class="sc-bar"><div class="sc-fill med" style="width:75%"></div></div>
+      </div>
+      <div class="score-card med">
+        <div class="sc-label">Accessibility</div>
+        <div class="sc-score med">6.5</div>
+        <div class="sc-note">Some ARIA labels, non-color risk indicators — needs more depth</div>
+        <div class="sc-bar"><div class="sc-fill med" style="width:65%"></div></div>
+      </div>
+      <div class="score-card med">
+        <div class="sc-label">Mobile / Responsiveness</div>
+        <div class="sc-score med">6.0</div>
+        <div class="sc-note">Desktop-first. No evident mobile breakpoints for complex tables</div>
+        <div class="sc-bar"><div class="sc-fill med" style="width:60%"></div></div>
       </div>
     </div>
   </div>
 
-  <div class="grid-2 mb-20">
-    <!-- Risk Heatmap -->
-    <div class="card">
-      <div class="flex-between mb-12">
+  <!-- ═══════════════════════════════════ OVERVIEW -->
+  <div id="overview" class="section">
+    <div class="section-head">
+      <div class="sh-num">01</div>
+      <div class="sh-text">
+        <h2>Project Overview</h2>
+        <p>What is SafeSource and who is it for?</p>
+      </div>
+    </div>
+    <div class="prose">
+      <p><strong>SafeSource v3</strong> is an internal B2B tool used by food manufacturer QA (Quality Assurance) teams to manage supplier compliance. It replaces email chains and spreadsheets with a structured, auditable system for tracking food safety certifications, sending formal queries to suppliers, and escalating compliance failures.</p>
+      <p>The primary user is <strong>Riya Kapoor, a QA Manager</strong>, who oversees 48 active suppliers across Dairy, Meat, Produce, and Packaging categories. Her core jobs-to-be-done are: spot compliance risk before it becomes a problem, send and track formal queries to suppliers, and escalate when suppliers don't respond.</p>
+      <p>The "v3" naming signals this is a mature, iterated product — the designer has gone through at least two earlier versions and refined based on feedback. This is a strong signal of real product thinking.</p>
+    </div>
+
+    <div class="impact-row">
+      <div class="impact-item"><div class="ii-val">48</div><div class="ii-label">Active Suppliers Managed</div></div>
+      <div class="impact-item"><div class="ii-val">4</div><div class="ii-label">Core Screen Flows</div></div>
+      <div class="impact-item"><div class="ii-val">19</div><div class="ii-label">Queries Needing Action</div></div>
+      <div class="impact-item"><div class="ii-val">7</div><div class="ii-label">Expired Certificates</div></div>
+      <div class="impact-item"><div class="ii-val">11d</div><div class="ii-label">Avg. Resolution Time</div></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════ CASE STUDY -->
+  <div id="casestudy" class="section">
+    <div class="section-head">
+      <div class="sh-num">02</div>
+      <div class="sh-text">
+        <h2>Full Case Study</h2>
+        <p>Problem, process, decisions, and outcomes</p>
+      </div>
+    </div>
+
+    <div class="prose">
+      <h3>The Problem</h3>
+      <p>Food manufacturer QA teams operate in a high-stakes environment where a single expired supplier certificate can trigger a product recall, fail an audit, or create legal liability. Yet most QA managers manage supplier compliance through a patchwork of email, shared spreadsheets, and calendar reminders — a system that breaks when volume increases or team members change.</p>
+      <p>The core problem SafeSource solves: <strong>QA managers need to know which suppliers are at risk, right now, and take action without switching context.</strong></p>
+
+      <h3>Screens & What They Solve</h3>
+    </div>
+
+    <div class="feature-list">
+      <div class="feature-item">
+        <div class="fi-badge fi-badge-strong">Strong</div>
         <div>
-          <div style="font-size:14px;font-weight:700;">Supplier Risk Heatmap</div>
-          <div style="font-size:11px;color:var(--text3);margin-top:2px">Click any cell to view supplier · ✕=expired, !=expiring, ✓=valid</div>
-        </div>
-        <div class="flex gap-6">
-          <span class="badge badge-success">✓ Low</span>
-          <span class="badge badge-warning">! Med</span>
-          <span class="badge badge-danger">✕ High</span>
+          <div class="fi-title">Dashboard — Action-First Design</div>
+          <div class="fi-desc">The dashboard leads with an "Action Banner" ("3 things need action before end of day") rather than passive data. This is excellent UX thinking — it respects the user's time and makes urgency visible immediately. The AI Smart Suggestion block with confidence score (94%) and reasoning panel shows mature thinking about how AI should communicate in high-stakes contexts.</div>
         </div>
       </div>
-      <div style="display:grid;grid-template-columns:80px 1fr;gap:7px;align-items:center;">
-        <span style="font-size:10px;color:var(--text3);font-weight:700;">Dairy</span>
-        <div style="display:flex;gap:4px;">
-          <div onclick="showScreen('detail')" style="width:33px;height:33px;background:var(--accent-light);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--accent-mid);cursor:pointer;border:1px solid transparent;transition:all .12s" title="Alpine Dairy — Low Risk" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='transparent'">✓</div>
-          <div style="width:33px;height:33px;background:var(--warning-light);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--warning);cursor:pointer;border:1px solid transparent;transition:all .12s" title="Cream Co — Medium Risk" onmouseover="this.style.borderColor='var(--warning)'" onmouseout="this.style.borderColor='transparent'">!</div>
-          <div style="width:33px;height:33px;background:var(--accent-light);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--accent-mid);cursor:pointer;border:1px solid transparent;transition:all .12s" title="MilkFarm — Low Risk" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='transparent'">✓</div>
-          <div onclick="showScreen('detail')" style="width:33px;height:33px;background:var(--danger-light);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--danger);cursor:pointer;border:1px solid transparent;transition:all .12s" title="CreamTech — High Risk, cert expired" onmouseover="this.style.borderColor='var(--danger)'" onmouseout="this.style.borderColor='transparent'">✕</div>
-          <div style="width:33px;height:33px;background:var(--accent-light);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--accent-mid);cursor:pointer;border:1px solid transparent;transition:all .12s" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='transparent'">✓</div>
+      <div class="feature-item">
+        <div class="fi-badge fi-badge-strong">Strong</div>
+        <div>
+          <div class="fi-title">Escalation Flags — Contextual, Not Just Alerting</div>
+          <div class="fi-desc">Each escalation flag includes the "why" behind the severity rating (e.g. "Why high: 2 expired certs + no supplier response + audit grade C"). This is a key insight — most dashboards show alerts without reasoning, forcing users to investigate. SafeSource embeds the reasoning inline, reducing cognitive load and time to action.</div>
         </div>
-        <span style="font-size:10px;color:var(--text3);font-weight:700;">Meat</span>
-        <div style="display:flex;gap:4px;">
-          <div onclick="showScreen('detail')" style="width:33px;height:33px;background:var(--danger-light);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--danger);cursor:pointer;border:2px solid var(--danger)" title="Orchard Farms — HIGH · HACCP expired">✕</div>
-          <div style="width:33px;height:33px;background:var(--warning-light);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--warning);cursor:pointer;border:1px solid transparent;transition:all .12s" onmouseover="this.style.borderColor='var(--warning)'" onmouseout="this.style.borderColor='transparent'">!</div>
-          <div style="width:33px;height:33px;background:var(--danger-light);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--danger);cursor:pointer;border:2px solid var(--danger)" title="PackRight — HIGH · SLA breached" onclick="showScreen('detail')">✕</div>
-          <div style="width:33px;height:33px;background:var(--accent-light);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--accent-mid);cursor:pointer;border:1px solid transparent;transition:all .12s" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='transparent'">✓</div>
-          <div style="width:33px;height:33px;background:var(--warning-light);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--warning);cursor:pointer;border:1px solid transparent;transition:all .12s" onmouseover="this.style.borderColor='var(--warning)'" onmouseout="this.style.borderColor='transparent'">!</div>
+      </div>
+      <div class="feature-item">
+        <div class="fi-badge fi-badge-strong">Strong</div>
+        <div>
+          <div class="fi-title">Raise Query — 3-Step Progressive Disclosure</div>
+          <div class="fi-desc">The query creation flow uses numbered steps (Supplier → Template → Details) with auto-populated fields (priority auto-set to High based on supplier risk profile, pre-filled subject line, pre-written message). This shows deep workflow knowledge — experienced QA managers want speed, not blank forms.</div>
         </div>
-        <span style="font-size:10px;color:var(--text3);font-weight:700;">Produce</span>
-        <div style="display:flex;gap:4px;">
-          <div style="width:33px;height:33px;background:var(--accent-light);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--accent-mid);cursor:pointer;border:1px solid transparent;transition:all .12s" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='transparent'">✓</div>
-          <div style="width:33px;height:33px;background:var(--accent-light);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--accent-mid);cursor:pointer;border:1px solid transparent;transition:all .12s" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='transparent'">✓</div>
-          <div style="width:33px;height:33px;background:var(--warning-light);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--warning);cursor:pointer;border:1px solid transparent;transition:all .12s" onmouseover="this.style.borderColor='var(--warning)'" onmouseout="this.style.borderColor='transparent'">!</div>
-          <div style="width:33px;height:33px;background:var(--accent-light);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--accent-mid);cursor:pointer;border:1px solid transparent;transition:all .12s" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='transparent'">✓</div>
-          <div style="width:33px;height:33px;background:var(--warning-light);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--warning);cursor:pointer;border:1px solid transparent;transition:all .12s" onmouseover="this.style.borderColor='var(--warning)'" onmouseout="this.style.borderColor='transparent'">!</div>
+      </div>
+      <div class="feature-item">
+        <div class="fi-badge fi-badge-strong">Strong</div>
+        <div>
+          <div class="fi-title">Query Detail — Communication + Audit Trail in One</div>
+          <div class="fi-desc">The detail view combines a real-time chat thread with a structured activity log timeline. This is smart because it serves two different needs: the supplier-facing conversation (informal, fast) and the internal audit trail (formal, permanent). Most tools separate these; SafeSource merges them without losing clarity.</div>
         </div>
-        <span style="font-size:10px;color:var(--text3);font-weight:700;">Packaging</span>
-        <div style="display:flex;gap:4px;">
-          <div style="width:33px;height:33px;background:var(--warning-light);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--warning);cursor:pointer;border:1px solid transparent;transition:all .12s" onmouseover="this.style.borderColor='var(--warning)'" onmouseout="this.style.borderColor='transparent'">!</div>
-          <div onclick="showScreen('detail')" style="width:33px;height:33px;background:var(--danger-light);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--danger);cursor:pointer;border:2px solid var(--danger)" title="PackRight — HIGH">✕</div>
-          <div style="width:33px;height:33px;background:var(--accent-light);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--accent-mid);cursor:pointer;border:1px solid transparent;transition:all .12s" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='transparent'">✓</div>
+      </div>
+      <div class="feature-item">
+        <div class="fi-badge fi-badge-gap">Gap</div>
+        <div>
+          <div class="fi-title">Supplier Risk Heatmap — Interaction Ambiguity</div>
+          <div class="fi-desc">The heatmap cells use ✓, !, ✕ symbols (which is excellent for accessibility) but the interaction model is unclear — some cells have onclick handlers, others don't. There's no legend for what each row/column represents beyond the category label. A QA manager scanning this quickly may miss which specific supplier a cell belongs to.</div>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="fi-badge fi-badge-gap">Gap</div>
+        <div>
+          <div class="fi-title">Query Tracker — Column Density</div>
+          <div class="fi-desc">The tracker table has 9 columns in a fixed grid. At standard laptop resolution this will feel tight. There's no column resizing, sorting indicators, or saved filter states. For a QA manager who lives in this view all day, these omissions add friction over time.</div>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="fi-badge fi-badge-missing">Missing</div>
+        <div>
+          <div class="fi-title">Empty States & Onboarding</div>
+          <div class="fi-desc">No empty state designs visible for when there are 0 queries, 0 escalations, or 0 expired certificates. These moments are critical — a new user who logs in with no data needs guidance, not a blank screen. Also no first-run onboarding or tooltips for new QA managers joining the team.</div>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="fi-badge fi-badge-missing">Missing</div>
+        <div>
+          <div class="fi-title">Mobile / Tablet Breakpoints</div>
+          <div class="fi-desc">The design is fully desktop-first. Given that QA managers often conduct supplier audits on-site with tablets, the lack of responsive breakpoints is a meaningful gap. The supplier table grid (9 columns) would be unusable on any screen under 1100px wide.</div>
         </div>
       </div>
     </div>
 
-    <!-- Compliance Trend -->
-    <div class="card">
-      <div style="font-size:14px;font-weight:700;margin-bottom:14px;">Portfolio Compliance Trend</div>
-      <div style="display:flex;align-items:flex-end;gap:7px;height:64px;margin-bottom:8px;">
-        <div style="display:flex;flex-direction:column;align-items:center;gap:3px;flex:1;"><div style="width:100%;background:var(--accent);border-radius:4px;height:82%"></div><span style="font-size:9px;color:var(--text3)">Jan</span></div>
-        <div style="display:flex;flex-direction:column;align-items:center;gap:3px;flex:1;"><div style="width:100%;background:var(--accent);border-radius:4px;height:80%"></div><span style="font-size:9px;color:var(--text3)">Feb</span></div>
-        <div style="display:flex;flex-direction:column;align-items:center;gap:3px;flex:1;"><div style="width:100%;background:var(--warning);border-radius:4px;height:72%"></div><span style="font-size:9px;color:var(--text3)">Mar</span></div>
-        <div style="display:flex;flex-direction:column;align-items:center;gap:3px;flex:1;"><div style="width:100%;background:var(--warning);border-radius:4px;height:66%"></div><span style="font-size:9px;color:var(--text3)">Apr</span></div>
-        <div style="display:flex;flex-direction:column;align-items:center;gap:3px;flex:1;"><div style="width:100%;background:var(--danger);border-radius:4px;height:58%"></div><span style="font-size:9px;color:var(--text3)">Now</span></div>
-      </div>
-      <div style="font-size:12px;color:var(--warning);font-weight:600;margin-bottom:14px;">▼ Portfolio score dropped 14 pts in 60 days — action needed</div>
-      <hr class="divider" style="margin:10px 0">
-      <div class="section-label">Certificate Status</div>
-      <div style="display:flex;flex-direction:column;gap:7px;">
-        <div style="display:flex;align-items:center;justify-content:space-between;">
-          <div style="display:flex;align-items:center;gap:6px;font-size:12px;"><div style="width:8px;height:8px;border-radius:2px;background:var(--accent)"></div> Valid</div>
-          <div style="display:flex;align-items:center;gap:8px;"><div style="width:100px;"><div class="sla-bar-wrap"><div class="sla-bar sla-ok" style="width:67%"></div></div></div><span style="font-size:12px;font-weight:600;width:22px;text-align:right">32</span></div>
-        </div>
-        <div style="display:flex;align-items:center;justify-content:space-between;">
-          <div style="display:flex;align-items:center;gap:6px;font-size:12px;"><div style="width:8px;height:8px;border-radius:2px;background:var(--warning)"></div> Expiring ≤30d</div>
-          <div style="display:flex;align-items:center;gap:8px;"><div style="width:100px;"><div class="sla-bar-wrap"><div class="sla-bar sla-warn" style="width:19%"></div></div></div><span style="font-size:12px;font-weight:600;color:var(--warning);width:22px;text-align:right">9</span></div>
-        </div>
-        <div style="display:flex;align-items:center;justify-content:space-between;">
-          <div style="display:flex;align-items:center;gap:6px;font-size:12px;"><div style="width:8px;height:8px;border-radius:2px;background:var(--danger)"></div> Expired — act now</div>
-          <div style="display:flex;align-items:center;gap:8px;"><div style="width:100px;"><div class="sla-bar-wrap"><div class="sla-bar sla-breach" style="width:15%"></div></div></div><span style="font-size:12px;font-weight:600;color:var(--danger);width:22px;text-align:right">7</span></div>
-        </div>
-      </div>
-      <button class="btn btn-sm btn-danger mt-12" style="width:100%;justify-content:center;" onclick="showToast('Filtered to 7 expired certificates','⚠')">Request renewals for all 7 expired →</button>
+    <div class="callout callout-green">
+      <strong>Key Design Decision Worth Discussing in Interview:</strong> The AI confidence score (94%) and the inline "Why this suggestion?" reasoning panel shows the designer understood a critical principle — AI in high-stakes workflows must be explainable, not just authoritative. This is a sophisticated insight that shows product maturity.
     </div>
   </div>
 
-  <!-- IMPROVEMENT 4+5: Supplier List with Bulk Actions + Contextual Insights -->
-  <div class="card-flush">
-    <div style="padding:14px 16px;border-bottom:1px solid var(--border);">
-      <div class="flex-between mb-10">
-        <div style="font-size:14px;font-weight:700;">Supplier List</div>
-        <div class="flex gap-8 flex-center">
-          <div class="search-wrap">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-            <input class="search-input" placeholder="Search by name or ID…" aria-label="Search suppliers">
-          </div>
-          <div class="filter-chips">
-            <div class="chip active" onclick="filterChip(this)">All <span class="chip-count">48</span></div>
-            <div class="chip chip-danger" onclick="filterChip(this)">Expired Certs <span class="chip-count">7</span></div>
-            <div class="chip" onclick="filterChip(this)">High Risk <span class="chip-count">5</span></div>
-            <div class="chip" onclick="filterChip(this)">SLA Breach <span class="chip-count">6</span></div>
-            <div class="chip" onclick="filterChip(this)">Silent &gt;7d <span class="chip-count">3</span></div>
-          </div>
-        </div>
+  <!-- ═══════════════════════════════════ HEURISTICS -->
+  <div id="heuristics" class="section">
+    <div class="section-head">
+      <div class="sh-num">03</div>
+      <div class="sh-text">
+        <h2>UX Heuristic Evaluation</h2>
+        <p>Nielsen's 10 Usability Heuristics applied to SafeSource v3</p>
       </div>
     </div>
 
-    <!-- BULK ACTION BAR (hidden by default, shown when rows selected) -->
-    <div id="bulk-bar" class="bulk-bar" style="display:none;margin:8px 16px;border-radius:var(--radius)">
-      <span class="bulk-bar-count" id="bulk-count">2 suppliers selected</span>
-      <div class="bulk-bar-divider"></div>
-      <button class="bulk-btn" onclick="showToast('Reminder sent to 2 suppliers','📧')">📧 Send Reminder</button>
-      <button class="bulk-btn" onclick="showToast('Bulk renewal request sent to 2 suppliers','📋')">📋 Request Cert Renewal</button>
-      <button class="bulk-btn bulk-btn-danger" onclick="showToast('2 suppliers escalated to QA Manager','🔺')">🔺 Bulk Escalate</button>
-      <button class="bulk-btn" onclick="showToast('Exported to CSV','⬇')">⬇ Export</button>
-      <button class="bulk-close" onclick="clearSelection()" aria-label="Clear selection">✕</button>
-    </div>
+    <table class="heuristic-table">
+      <thead>
+        <tr>
+          <th>Heuristic</th>
+          <th>Status</th>
+          <th>Evidence</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div class="ht-name">1. Visibility of System Status</div></td>
+          <td><div class="ht-pass">✓ PASS</div></td>
+          <td>SLA progress bars, activity log timestamps, toast notifications on every action, badge counts on nav tabs.</td>
+        </tr>
+        <tr>
+          <td><div class="ht-name">2. Match Between System & Real World</div></td>
+          <td><div class="ht-pass">✓ PASS</div></td>
+          <td>Domain language is precise — HACCP, BRC, Non-Conformance, SLA. Matches QA professionals' mental models exactly.</td>
+        </tr>
+        <tr>
+          <td><div class="ht-name">3. User Control & Freedom</div></td>
+          <td><div class="ht-part">⚠ PARTIAL</div></td>
+          <td>Toast dismiss exists. Snooze action on banner. But no undo for bulk actions, no way to recall a sent query.</td>
+        </tr>
+        <tr>
+          <td><div class="ht-name">4. Consistency & Standards</div></td>
+          <td><div class="ht-pass">✓ PASS</div></td>
+          <td>Button styles, badge variants, card patterns are consistent throughout. Color-to-severity mapping never breaks.</td>
+        </tr>
+        <tr>
+          <td><div class="ht-name">5. Error Prevention</div></td>
+          <td><div class="ht-pass">✓ PASS</div></td>
+          <td">Auto-priority setting, input hints ("Clear, direct requests get 40% faster responses"), supplier risk warning when composing a query to a high-risk supplier.</td>
+        </tr>
+        <tr>
+          <td><div class="ht-name">6. Recognition over Recall</div></td>
+          <td><div class="ht-pass">✓ PASS</div></td>
+          <td>Query templates with icons and descriptions. Preview panel in Raise Query. Cert pills always visible in supplier rows.</td>
+        </tr>
+        <tr>
+          <td><div class="ht-name">7. Flexibility & Efficiency</div></td>
+          <td><div class="ht-part">⚠ PARTIAL</div></td>
+          <td>Bulk actions exist. Smart action buttons in tracker. But no keyboard shortcuts, no saved searches, no custom dashboard widgets.</td>
+        </tr>
+        <tr>
+          <td><div class="ht-name">8. Aesthetic & Minimalist Design</div></td>
+          <td><div class="ht-pass">✓ PASS</div></td>
+          <td>Clean card-based layout. No decorative clutter. Data density is appropriate for the user type (power users who need density).</td>
+        </tr>
+        <tr>
+          <td><div class="ht-name">9. Help Users Recover from Errors</div></td>
+          <td><div class="ht-fail">✗ NEEDS WORK</div></td>
+          <td>No visible error states for failed form submissions, network errors, or upload failures. Error handling is not designed.</td>
+        </tr>
+        <tr>
+          <td><div class="ht-name">10. Help & Documentation</div></td>
+          <td><div class="ht-part">⚠ PARTIAL</div></td>
+          <td>Input hints provide micro-documentation. Tooltip system exists. But no contextual help panel, no onboarding guide, no FAQ.</td>
+        </tr>
+      </tbody>
+    </table>
 
-    <div class="sup-header" aria-label="Table headers">
-      <input type="checkbox" class="row-checkbox" id="select-all" onchange="toggleSelectAll(this)" aria-label="Select all suppliers">
-      <span></span>
-      <span>Supplier</span>
-      <span>Category</span>
-      <span>Risk</span>
-      <span>Why Risky / What's Pending</span>
-      <span>Last Response</span>
-      <span>Open Queries</span>
-      <span>Action</span>
-    </div>
-
-    <!-- Row 1: HIGH – Rich context -->
-    <div class="sup-row" onclick="rowClick(event,'detail')">
-      <input type="checkbox" class="row-checkbox" onclick="event.stopPropagation()" onchange="updateBulk(this)" aria-label="Select Orchard Farms">
-      <div class="risk-bar-v bar-high" title="High risk supplier" aria-label="High risk"></div>
-      <div>
-        <span class="sup-name">Orchard Farms Ltd.</span>
-        <div class="sup-meta">SUP-0041 · Meat &amp; Poultry · Bengaluru</div>
-        <div class="sup-insight" aria-label="Risk reason: HACCP expired 12 days ago, 2 open NCs">⚠ HACCP expired 12d ago · 2 unresolved NCs</div>
-        <div class="sup-action-pending">→ Awaiting cert upload (query open 12d)</div>
-      </div>
-      <div><span class="cat-tag">Meat</span></div>
-      <div><span class="risk-chip risk-high" role="status" aria-label="High risk">High</span></div>
-      <div>
-        <div style="display:flex;gap:3px;flex-wrap:wrap;margin-bottom:5px;"><span class="cert-pill cert-exp" title="HACCP certificate expired">HACCP ✕</span><span class="cert-pill cert-ok" title="ISO valid">ISO ✓</span></div>
-        <div class="sla-badge sla-warn-b">⚠ 3d left</div>
-        <div class="sla-bar-wrap mt-8" style="width:90px;"><div class="sla-bar sla-warn" style="width:60%"></div></div>
-      </div>
-      <div><span class="sup-last-resp resp-ok">2 days ago</span></div>
-      <div><span class="badge badge-danger"><span class="badge-dot"></span>4 open</span></div>
-      <div><button class="btn btn-xs btn-primary" onclick="event.stopPropagation();showScreen('raise')">+ Query</button></div>
-    </div>
-
-    <!-- Row 2: HIGH – SLA breached, silent supplier -->
-    <div class="sup-row" onclick="rowClick(event,'detail')">
-      <input type="checkbox" class="row-checkbox" onclick="event.stopPropagation()" onchange="updateBulk(this)" aria-label="Select PackRight Solutions">
-      <div class="risk-bar-v bar-high" title="High risk supplier" aria-label="High risk"></div>
-      <div>
-        <span class="sup-name">PackRight Solutions</span>
-        <div class="sup-meta">SUP-0038 · Packaging · Chennai</div>
-        <div class="sup-insight" aria-label="Risk reason: ISO and BRCGS expired, no email open in 8 days">⚠ ISO + BRCGS both expired · No email open in 8d</div>
-        <div class="sup-action-pending" style="color:var(--danger);">→ Escalation required — SLA breached 8 days ago</div>
-      </div>
-      <div><span class="cat-tag">Packaging</span></div>
-      <div><span class="risk-chip risk-high">High</span></div>
-      <div>
-        <div style="display:flex;gap:3px;flex-wrap:wrap;margin-bottom:5px;"><span class="cert-pill cert-exp">ISO ✕</span><span class="cert-pill cert-exp">BRCGS ✕</span></div>
-        <div class="sla-badge sla-breach-b">✕ Breached 8d</div>
-        <div class="sla-bar-wrap mt-8" style="width:90px;"><div class="sla-bar sla-breach" style="width:100%"></div></div>
-      </div>
-      <div><span class="sup-last-resp resp-late">8 days ago</span></div>
-      <div><span class="badge badge-danger"><span class="badge-dot"></span>3 open</span></div>
-      <div><button class="btn btn-xs btn-danger" onclick="event.stopPropagation();showToast('Escalated to QA Manager','🔺')">Escalate</button></div>
-    </div>
-
-    <!-- Row 3: MEDIUM -->
-    <div class="sup-row" onclick="rowClick(event,'detail')">
-      <input type="checkbox" class="row-checkbox" onclick="event.stopPropagation()" onchange="updateBulk(this)" aria-label="Select FreshCo Produce">
-      <div class="risk-bar-v bar-med" title="Medium risk supplier" aria-label="Medium risk"></div>
-      <div>
-        <span class="sup-name">FreshCo Produce</span>
-        <div class="sup-meta">SUP-0022 · Produce · Mumbai</div>
-        <div class="sup-insight" style="color:var(--warning);">⚠ BRC cert expiring in 18 days</div>
-        <div class="sup-action-pending">→ Send renewal reminder before expiry</div>
-      </div>
-      <div><span class="cat-tag">Produce</span></div>
-      <div><span class="risk-chip risk-med">Medium</span></div>
-      <div>
-        <div style="display:flex;gap:3px;flex-wrap:wrap;margin-bottom:5px;"><span class="cert-pill cert-warn">BRC ⚠</span><span class="cert-pill cert-ok">SQF ✓</span></div>
-        <div class="sla-badge sla-ok-b">✓ On track</div>
-        <div class="sla-bar-wrap mt-8" style="width:90px;"><div class="sla-bar sla-ok" style="width:35%"></div></div>
-      </div>
-      <div><span class="sup-last-resp resp-ok">1 day ago</span></div>
-      <div><span class="badge badge-warning"><span class="badge-dot"></span>2 open</span></div>
-      <div><button class="btn btn-xs" onclick="event.stopPropagation();showScreen('raise')">+ Query</button></div>
-    </div>
-
-    <!-- Row 4: LOW -->
-    <div class="sup-row" onclick="rowClick(event,'detail')">
-      <input type="checkbox" class="row-checkbox" onclick="event.stopPropagation()" onchange="updateBulk(this)" aria-label="Select Alpine Dairy">
-      <div class="risk-bar-v bar-low" title="Low risk supplier" aria-label="Low risk"></div>
-      <div>
-        <span class="sup-name">Alpine Dairy Co.</span>
-        <div class="sup-meta">SUP-0011 · Dairy · Pune</div>
-        <div style="font-size:10px;color:var(--accent-mid);font-weight:600;margin-top:3px;">✓ All certs valid · No open issues</div>
-      </div>
-      <div><span class="cat-tag">Dairy</span></div>
-      <div><span class="risk-chip risk-low">Low</span></div>
-      <div>
-        <div style="display:flex;gap:3px;flex-wrap:wrap;"><span class="cert-pill cert-ok">HACCP ✓</span><span class="cert-pill cert-ok">ISO ✓</span></div>
-        <div class="sla-badge sla-ok-b mt-8">✓ No open</div>
-      </div>
-      <div><span class="sup-last-resp resp-ok">Today</span></div>
-      <div><span class="badge badge-neutral"><span class="badge-dot"></span>0 open</span></div>
-      <div><button class="btn btn-xs" onclick="event.stopPropagation();showScreen('raise')">+ Query</button></div>
-    </div>
-
-    <!-- Row 5: LOW -->
-    <div class="sup-row" onclick="rowClick(event,'detail')">
-      <input type="checkbox" class="row-checkbox" onclick="event.stopPropagation()" onchange="updateBulk(this)" aria-label="Select SunGrain Cereals">
-      <div class="risk-bar-v bar-low" title="Low risk supplier" aria-label="Low risk"></div>
-      <div>
-        <span class="sup-name">SunGrain Cereals</span>
-        <div class="sup-meta">SUP-0029 · Dry Goods · Hyderabad</div>
-        <div style="font-size:10px;color:var(--text3);margin-top:3px;">1 query awaiting supplier review</div>
-      </div>
-      <div><span class="cat-tag">Dry Goods</span></div>
-      <div><span class="risk-chip risk-low">Low</span></div>
-      <div>
-        <div style="display:flex;gap:3px;flex-wrap:wrap;"><span class="cert-pill cert-ok">HACCP ✓</span><span class="cert-pill cert-ok">Organic ✓</span></div>
-        <div class="sla-badge sla-ok-b mt-8">✓ On track</div>
-      </div>
-      <div><span class="sup-last-resp resp-ok">3 days ago</span></div>
-      <div><span class="badge badge-info"><span class="badge-dot"></span>1 open</span></div>
-      <div><button class="btn btn-xs" onclick="event.stopPropagation();showScreen('raise')">+ Query</button></div>
-    </div>
-
-    <div class="smart-actions">
-      <span style="font-size:11px;color:var(--text3);font-weight:600;">Quick actions:</span>
-      <button class="smart-btn" onclick="showToast('Bulk renewal sent to 7 suppliers','📤')"><span>📤</span> Send cert renewal to all expired (7)</button>
-      <button class="smart-btn" onclick="showToast('Compliance report exported','📊')"><span>📊</span> Export compliance report</button>
-      <button class="smart-btn" onclick="showScreen('tracking')"><span>⚠</span> View all SLA breaches (6)</button>
+    <div class="callout callout-blue">
+      <strong>Score: 6 Pass / 3 Partial / 1 Fail.</strong> This is a strong result for a portfolio piece. The one clear failure (error recovery) is a common gap in prototypes and easy to explain in an interview.
     </div>
   </div>
 
-</div>
-</div>
-
-
-<!-- ══════════════════════════════════════════════════
-     SCREEN 2: RAISE QUERY v3
-══════════════════════════════════════════════════ -->
-<div id="screen-raise" class="screen">
-<div class="page-inner">
-  <div class="flex-between mb-20">
-    <div>
-      <div class="page-title">Raise a New Query</div>
-      <div class="page-sub">Takes about 2 minutes · Auto-fills from supplier history</div>
+  <!-- ═══════════════════════════════════ JOURNEY -->
+  <div id="journey" class="section">
+    <div class="section-head">
+      <div class="sh-num">04</div>
+      <div class="sh-text">
+        <h2>User Journey Map</h2>
+        <p>Riya's typical Monday morning workflow through SafeSource</p>
+      </div>
     </div>
-    <button class="btn" onclick="showScreen('dashboard')">← Back</button>
+
+    <div class="journey">
+      <div class="journey-step">
+        <div class="js-num">01</div>
+        <div class="js-title">Opens Dashboard</div>
+        <div class="js-desc">Sees the Action Banner — 3 urgent items. Immediately knows what to do.</div>
+        <div class="js-feel">😌</div>
+        <div class="js-sentiment js-sent-pos">CONFIDENT</div>
+      </div>
+      <div class="journey-step">
+        <div class="js-num">02</div>
+        <div class="js-title">Reviews AI Suggestion</div>
+        <div class="js-desc">Reads AI reasoning for escalation. Trusts it because the confidence and reasoning are visible.</div>
+        <div class="js-feel">🤔</div>
+        <div class="js-sentiment js-sent-pos">INFORMED</div>
+      </div>
+      <div class="journey-step">
+        <div class="js-num">03</div>
+        <div class="js-title">Raises a Query</div>
+        <div class="js-desc">Uses template + pre-filled form. Sends in under 2 minutes.</div>
+        <div class="js-feel">⚡</div>
+        <div class="js-sentiment js-sent-pos">EFFICIENT</div>
+        <div class="js-pain">Pain: No draft save if navigating away</div>
+      </div>
+      <div class="journey-step">
+        <div class="js-num">04</div>
+        <div class="js-title">Checks Query Tracker</div>
+        <div class="js-desc">Scans 19 open queries, filters by SLA breach.</div>
+        <div class="js-feel">😓</div>
+        <div class="js-sentiment js-sent-neu">OVERWHELMED</div>
+        <div class="js-pain">Pain: 9-column table feels dense</div>
+      </div>
+      <div class="journey-step">
+        <div class="js-num">05</div>
+        <div class="js-title">Views Query Detail</div>
+        <div class="js-desc">Reads supplier response, sends follow-up message, logs the call outcome.</div>
+        <div class="js-feel">✅</div>
+        <div class="js-sentiment js-sent-pos">IN CONTROL</div>
+      </div>
+      <div class="journey-step">
+        <div class="js-num">06</div>
+        <div class="js-title">Escalates Supplier</div>
+        <div class="js-desc">One-click escalation to QA Manager. Toast confirms. Activity log auto-updates.</div>
+        <div class="js-feel">🎯</div>
+        <div class="js-sentiment js-sent-pos">RESOLVED</div>
+        <div class="js-pain">Pain: No escalation follow-up reminder</div>
+      </div>
+    </div>
+
+    <div class="callout callout-amber">
+      <strong>Key Journey Insight:</strong> The biggest emotional low point is Step 4 — the Query Tracker. This is where QA managers spend the most time but the UX is least polished. This gap is a strong interview talking point: "If I were to iterate on v4, I would redesign the tracker as a Kanban view with SLA-based swim lanes."
+    </div>
   </div>
 
-  <div class="grid-2" style="gap:20px;align-items:start;">
-    <!-- LEFT: Form -->
-    <div>
-      <!-- Step 1 -->
-      <div class="card mb-16">
-        <div class="flex-center gap-8 mb-14">
-          <div style="width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">1</div>
-          <span style="font-weight:700;font-size:14px;">Which supplier is this about?</span>
-        </div>
-        <div class="input-group" style="margin-bottom:10px">
-          <label class="input-label" for="sup-search">Search by name or supplier ID</label>
-          <input id="sup-search" class="input" placeholder="e.g. Orchard Farms or SUP-0041" value="Orchard Farms Ltd.">
-        </div>
-        <!-- Supplier card with risk context -->
-        <div style="background:var(--danger-light);border:1.5px solid var(--danger);border-radius:9px;padding:12px 14px;">
-          <div class="flex-between mb-6">
-            <div>
-              <div style="font-size:14px;font-weight:700;">Orchard Farms Ltd.</div>
-              <div style="font-size:11px;color:var(--text2);margin-top:2px;">SUP-0041 · Meat &amp; Poultry · <span style="color:var(--danger);font-weight:600;">High Risk</span> · 4 open queries</div>
-            </div>
-            <div style="display:flex;gap:4px;"><span class="cert-pill cert-exp">HACCP ✕</span><span class="cert-pill cert-ok">ISO ✓</span></div>
-          </div>
-          <div style="font-size:12px;color:var(--danger);font-weight:600;padding:7px 10px;background:rgba(181,45,45,.08);border-radius:6px;">
-            ⚠ This supplier has 2 open NCs and a missing HACCP cert. New queries will be flagged as high priority automatically.
-          </div>
-        </div>
-      </div>
-
-      <!-- Step 2: Template -->
-      <div class="card mb-16">
-        <div class="flex-center gap-8 mb-12">
-          <div style="width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">2</div>
-          <span style="font-weight:700;font-size:14px;">What are you asking about?</span>
-        </div>
-        <div class="template-grid">
-          <div class="template-card selected" onclick="selectTemplate(this)"><div class="tc-icon">📋</div><div class="tc-title">Certificate Update</div><div class="tc-desc">Request renewal for expiring or expired certs</div></div>
-          <div class="template-card" onclick="selectTemplate(this)"><div class="tc-icon">⚗️</div><div class="tc-title">Allergen Info</div><div class="tc-desc">Confirm or update allergen declarations</div></div>
-          <div class="template-card" onclick="selectTemplate(this)"><div class="tc-icon">🔬</div><div class="tc-title">HACCP Review</div><div class="tc-desc">Request HACCP plan or audit report</div></div>
-          <div class="template-card" onclick="selectTemplate(this)"><div class="tc-icon">🧪</div><div class="tc-title">Lab Results</div><div class="tc-desc">Request micro/chemical test results</div></div>
-          <div class="template-card" onclick="selectTemplate(this)"><div class="tc-icon">📦</div><div class="tc-title">Labelling</div><div class="tc-desc">Label compliance and artwork review</div></div>
-          <div class="template-card" onclick="selectTemplate(this)"><div class="tc-icon">✏️</div><div class="tc-title">Write My Own</div><div class="tc-desc">Custom query from scratch</div></div>
-        </div>
-      </div>
-
-      <!-- Step 3: Details -->
-      <div class="card">
-        <div class="flex-center gap-8 mb-14">
-          <div style="width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">3</div>
-          <span style="font-weight:700;font-size:14px;">Add details</span>
-        </div>
-        <div class="input-group">
-          <label class="input-label" for="q-subject">Query subject <span style="color:var(--danger)">*</span></label>
-          <input id="q-subject" class="input" value="HACCP Certificate Renewal — Orchard Farms Ltd.">
-        </div>
-        <div class="grid-2 mb-14">
-          <div>
-            <label class="input-label" for="q-cat">Category</label>
-            <select id="q-cat" class="select"><option selected>Certification</option><option>Allergen</option><option>Audit</option><option>Non-Conformance</option><option>Labelling</option></select>
-          </div>
-          <div>
-            <label class="input-label">Priority</label>
-            <div class="priority-opts">
-              <div class="priority-opt" onclick="setPriority('low',this)" role="button" tabindex="0" aria-label="Low priority">Low</div>
-              <div class="priority-opt" onclick="setPriority('med',this)" role="button" tabindex="0" aria-label="Medium priority">Medium</div>
-              <div class="priority-opt sel-high" onclick="setPriority('high',this)" role="button" tabindex="0" aria-label="High priority">High ← auto-set</div>
-            </div>
-          </div>
-        </div>
-        <div class="input-group">
-          <label class="input-label" for="q-due">Response needed by</label>
-          <input id="q-due" class="input" type="date" value="2025-04-30">
-          <div class="input-hint">That's 14 days from today. This supplier's average response time is 6.2 days.</div>
-        </div>
-        <div class="input-group">
-          <label class="input-label" for="q-msg">Your message to the supplier</label>
-          <textarea id="q-msg" class="textarea" style="min-height:96px;">Hi team,
-
-We've noted your HACCP certificate (ref: HACCP-2021-OF) expired on 3 Apr 2025. Please upload the renewed certificate or provide a status update.
-
-This is blocking our monthly compliance review. Please respond by the deadline.</textarea>
-          <div class="input-hint">Clear, direct requests get 40% faster responses — avoid vague language.</div>
-        </div>
-        <div class="input-group" style="margin-bottom:0">
-          <label class="input-label">Attach documents (optional)</label>
-          <div class="upload-zone">
-            <div style="font-size:22px;margin-bottom:6px;">📎</div>
-            <div style="font-size:13px;font-weight:500;color:var(--text2);">Drag &amp; drop files here, or <span style="color:var(--accent);cursor:pointer;">browse</span></div>
-            <div style="font-size:11px;color:var(--text3);margin-top:3px;">PDF, XLSX, DOCX, JPEG · Max 25MB each</div>
-          </div>
-        </div>
+  <!-- ═══════════════════════════════════ FOCUS AREAS -->
+  <div id="focus" class="section">
+    <div class="section-head">
+      <div class="sh-num">05</div>
+      <div class="sh-text">
+        <h2>UX Focus Areas</h2>
+        <p>The 5 most important UX principles at work in this design</p>
       </div>
     </div>
 
-    <!-- RIGHT: Preview + confirm -->
-    <div style="position:sticky;top:70px;">
-      <div class="card">
-        <div style="font-size:14px;font-weight:700;margin-bottom:14px;">Review before sending</div>
-        <div class="preview-block">
-          <div class="preview-row"><span class="preview-label">Query ID</span><span class="preview-val mono" style="color:var(--accent)">QRY-2025-047</span></div>
-          <div class="preview-row"><span class="preview-label">Supplier</span><span class="preview-val">Orchard Farms (SUP-0041)</span></div>
-          <div class="preview-row"><span class="preview-label">Category</span><span class="preview-val">Certification</span></div>
-          <div class="preview-row"><span class="preview-label">Priority</span><span class="preview-val" style="color:var(--danger)">🔴 High</span></div>
-          <div class="preview-row"><span class="preview-label">Due</span><span class="preview-val">30 Apr 2025</span></div>
-          <div class="preview-row"><span class="preview-label">Raised by</span><span class="preview-val">Riya Kapoor</span></div>
-          <div class="preview-row"><span class="preview-label">Auto-escalation</span><span class="preview-val">Day 7 if no response</span></div>
+    <div class="feature-list">
+      <div class="feature-item">
+        <div style="width:36px;height:36px;background:var(--green-light);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🎯</div>
+        <div>
+          <div class="fi-title">Focus Area 1 — Attention Economy & Priority Signalling</div>
+          <div class="fi-desc">The design correctly treats the user's attention as the scarcest resource. The Action Banner, AI Suggestion, and Escalation Flags are all above the fold and use a consistent visual hierarchy: red = act now, amber = act soon, green = okay. The designer understood that in a compliance tool, missed signals have real consequences — so the UI does the prioritisation work so the human doesn't have to.</div>
         </div>
-        <div style="background:var(--danger-light);border-radius:8px;padding:10px 12px;font-size:12px;color:var(--danger);margin-bottom:14px;">
-          ⚠ Sending to a high-risk supplier — query will be logged with priority flag and SLA monitoring enabled automatically.
-        </div>
-        <button class="btn btn-primary" style="width:100%;justify-content:center;font-size:13px;padding:10px;" onclick="showToast('Query QRY-2025-047 sent to Orchard Farms','✓')">Send Query to Supplier →</button>
-        <button class="btn" style="width:100%;justify-content:center;margin-top:8px;" onclick="showToast('Saved as draft','💾')">Save as Draft</button>
       </div>
-
-      <!-- Suggested similar queries -->
-      <div class="card mt-12">
-        <div class="section-label">Similar past queries</div>
-        <div style="font-size:12px;color:var(--text2);line-height:1.5;border-left:2px solid var(--border2);padding-left:10px;margin-bottom:8px;">
-          <strong>QRY-2025-031</strong> — HACCP renewal for FreshCo Produce resolved in 5 days after a follow-up call.
+      <div class="feature-item">
+        <div style="width:36px;height:36px;background:var(--blue-light);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🤖</div>
+        <div>
+          <div class="fi-title">Focus Area 2 — Human-AI Collaboration Design</div>
+          <div class="fi-desc">The AI box is one of the most sophisticated elements in the design. It shows: a suggestion, the reasoning behind it, a confidence score, estimated impact, time to act, and risk if ignored. It then offers a "Dismiss" button. This reflects an understanding that AI in high-stakes tools must be assistive, not authoritative — the human must remain in control and trust must be earned through transparency.</div>
         </div>
-        <div style="font-size:11px;color:var(--text3)">Tip: Include a reference document to reduce back-and-forth.</div>
+      </div>
+      <div class="feature-item">
+        <div style="width:36px;height:36px;background:var(--amber-light);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">📋</div>
+        <div>
+          <div class="fi-title">Focus Area 3 — Progressive Disclosure in Complex Forms</div>
+          <div class="fi-desc">The Raise Query screen uses 3 numbered steps to break down a multi-field form. More importantly, it uses context-awareness to pre-fill fields (priority auto-set, subject auto-generated, message pre-written). This reduces the user's cognitive load from "what do I write?" to "does this look right?" — a fundamentally different and faster interaction model.</div>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div style="width:36px;height:36px;background:var(--purple-light);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">📊</div>
+        <div>
+          <div class="fi-title">Focus Area 4 — Data Density vs. Clarity Balance</div>
+          <div class="fi-desc">The supplier table packs 9 columns of data while remaining readable — achieved through careful typographic hierarchy (supplier name 600 weight, metadata 400 weight), meaningful use of color-only as a secondary signal (primary signal is text/symbol), and micro-details like the 4px left border colour bar indicating risk level at a glance. This is data-dense design done with intention.</div>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div style="width:36px;height:36px;background:var(--red-light);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">♿</div>
+        <div>
+          <div class="fi-title">Focus Area 5 — Non-Color Risk Communication</div>
+          <div class="fi-desc">A subtle but important accessibility decision: risk chips use CSS ::before pseudo-elements to prepend triangle (▲), circle (●), and down-triangle (▼) symbols before the color-coded text. This ensures risk levels are communicated even in grayscale or for users with color vision deficiency. The heatmap also uses ✓, !, ✕ symbols rather than relying on color alone. This shows genuine accessibility thinking, not just color contrast checking.</div>
+        </div>
       </div>
     </div>
   </div>
 
-</div>
-</div>
-
-
-<!-- ══════════════════════════════════════════════════
-     SCREEN 3: QUERY TRACKING v3
-══════════════════════════════════════════════════ -->
-<div id="screen-tracking" class="screen">
-<div class="page-inner">
-
-  <div class="flex-between mb-16">
-    <div>
-      <div class="page-title">Query Tracker</div>
-      <div class="page-sub">7 queries need action · 3 are overdue · sorted by urgency</div>
-    </div>
-    <div class="flex gap-8">
-      <button class="btn btn-sm" onclick="showToast('Exported all queries to CSV','⬇')">⬇ Export</button>
-      <button class="btn btn-sm btn-primary" onclick="showScreen('raise')">+ Raise New Query</button>
-    </div>
-  </div>
-
-  <div class="filter-chips mb-16">
-    <div class="chip active" onclick="filterChip(this)">All <span class="chip-count">19</span></div>
-    <div class="chip" onclick="filterChip(this)">Needs Action <span class="chip-count">7</span></div>
-    <div class="chip chip-danger" onclick="filterChip(this)">Overdue <span class="chip-count">3</span></div>
-    <div class="chip" onclick="filterChip(this)">In Review <span class="chip-count">5</span></div>
-    <div class="chip" onclick="filterChip(this)">Resolved <span class="chip-count">9</span></div>
-  </div>
-
-  <div class="card-flush">
-    <div class="qr-header" aria-label="Query table headers">
-      <span></span><span></span><span>Query</span><span>Category</span><span>Priority</span><span>Progress</span><span>SLA</span><span>Action</span>
-    </div>
-
-    <!-- Row 1: Critical overdue -->
-    <div class="qr-row" onclick="showScreen('detail')">
-      <input type="checkbox" class="row-checkbox" onclick="event.stopPropagation()" aria-label="Select query">
-      <div class="risk-bar-v bar-high"></div>
-      <div>
-        <div class="mono" style="font-size:9px;color:var(--text3)">QRY-2025-034</div>
-        <div style="font-size:13px;font-weight:600;">PackRight — HACCP + ISO Certs Expired</div>
-        <div style="font-size:11px;color:var(--text3)">PackRight Solutions · Sent 8 Apr</div>
-        <div style="font-size:11px;color:var(--danger);font-weight:600;margin-top:3px;">⚠ No response — supplier hasn't opened email</div>
-      </div>
-      <div><span class="badge badge-neutral">Certification</span></div>
-      <div><span class="badge badge-danger"><span class="badge-dot"></span>Critical</span></div>
-      <div class="pt" style="gap:3px;">
-        <div class="pt pt-done"><div class="pt-dot"></div><div class="pt-line"></div></div>
-        <div class="pt pt-done"><div class="pt-dot"></div><div class="pt-line"></div></div>
-        <div class="pt pt-breach"><div class="pt-dot"></div></div>
-      </div>
-      <div><span class="sla-badge sla-breach-b">Breached 8d</span></div>
-      <div><button class="btn btn-xs btn-danger" onclick="event.stopPropagation();showToast('Escalated to QA Manager','🔺')">Escalate</button></div>
-    </div>
-
-    <!-- Row 2 -->
-    <div class="qr-row" onclick="showScreen('detail')">
-      <input type="checkbox" class="row-checkbox" onclick="event.stopPropagation()" aria-label="Select query">
-      <div class="risk-bar-v bar-high"></div>
-      <div>
-        <div class="mono" style="font-size:9px;color:var(--text3)">QRY-2025-038</div>
-        <div style="font-size:13px;font-weight:600;">Orchard Farms — HACCP Renewal</div>
-        <div style="font-size:11px;color:var(--text3)">Orchard Farms Ltd. · Sent 12 Apr</div>
-        <div style="font-size:11px;color:var(--warning);font-weight:600;margin-top:3px;">Acknowledged — waiting on document upload</div>
-      </div>
-      <div><span class="badge badge-neutral">Certification</span></div>
-      <div><span class="badge badge-danger"><span class="badge-dot"></span>High</span></div>
-      <div class="pt" style="gap:3px;">
-        <div class="pt pt-done"><div class="pt-dot"></div><div class="pt-line"></div></div>
-        <div class="pt pt-done"><div class="pt-dot"></div><div class="pt-line"></div></div>
-        <div class="pt pt-active"><div class="pt-dot"></div><div class="pt-line"></div></div>
-        <div class="pt pt-pending"><div class="pt-dot"></div></div>
-      </div>
-      <div><span class="sla-badge sla-warn-b">⚠ 3d left</span></div>
-      <div><button class="btn btn-xs" onclick="event.stopPropagation();showToast('Reminder sent to Orchard Farms','📧')">Remind</button></div>
-    </div>
-
-    <!-- Row 3 -->
-    <div class="qr-row" onclick="showScreen('detail')">
-      <input type="checkbox" class="row-checkbox" onclick="event.stopPropagation()" aria-label="Select query">
-      <div class="risk-bar-v bar-med"></div>
-      <div>
-        <div class="mono" style="font-size:9px;color:var(--text3)">QRY-2025-035</div>
-        <div style="font-size:13px;font-weight:600;">FreshCo Produce — Allergen Declaration Update</div>
-        <div style="font-size:11px;color:var(--text3)">FreshCo Produce · Sent 10 Apr</div>
-      </div>
-      <div><span class="badge badge-neutral">Allergen</span></div>
-      <div><span class="badge badge-warning"><span class="badge-dot"></span>Medium</span></div>
-      <div class="pt" style="gap:3px;">
-        <div class="pt pt-done"><div class="pt-dot"></div><div class="pt-line"></div></div>
-        <div class="pt pt-done"><div class="pt-dot"></div><div class="pt-line"></div></div>
-        <div class="pt pt-active"><div class="pt-dot"></div><div class="pt-line"></div></div>
-        <div class="pt pt-pending"><div class="pt-dot"></div></div>
-      </div>
-      <div><span class="sla-badge sla-ok-b">✓ 5d left</span></div>
-      <div><button class="btn btn-xs" onclick="event.stopPropagation();showScreen('detail')">View</button></div>
-    </div>
-
-    <!-- Row 4: Resolved -->
-    <div class="qr-row" onclick="showScreen('detail')" style="opacity:.65">
-      <input type="checkbox" class="row-checkbox" onclick="event.stopPropagation()" aria-label="Select query">
-      <div class="risk-bar-v bar-low"></div>
-      <div>
-        <div class="mono" style="font-size:9px;color:var(--text3)">QRY-2025-030</div>
-        <div style="font-size:13px;font-weight:600;">Alpine Dairy — ISO Renewal Confirmed</div>
-        <div style="font-size:11px;color:var(--text3)">Alpine Dairy Co. · Resolved 11 Apr</div>
-      </div>
-      <div><span class="badge badge-neutral">Certification</span></div>
-      <div><span class="badge badge-success"><span class="badge-dot"></span>Low</span></div>
-      <div class="pt" style="gap:3px;">
-        <div class="pt pt-done"><div class="pt-dot"></div><div class="pt-line"></div></div>
-        <div class="pt pt-done"><div class="pt-dot"></div><div class="pt-line"></div></div>
-        <div class="pt pt-done"><div class="pt-dot"></div><div class="pt-line"></div></div>
-        <div class="pt pt-done"><div class="pt-dot"></div></div>
-      </div>
-      <div><span class="sla-badge sla-ok-b">✓ Resolved</span></div>
-      <div><button class="btn btn-xs" onclick="event.stopPropagation();showScreen('detail')">Review</button></div>
-    </div>
-
-    <!-- Empty state example (hidden, for reference) -->
-    <div style="display:none" class="empty-state">
-      <div class="empty-icon">📭</div>
-      <div class="empty-title">No queries match this filter</div>
-      <div class="empty-sub">Try a different filter or raise a new query to get started.</div>
-      <button class="btn btn-primary" onclick="showScreen('raise')">+ Raise a Query</button>
-    </div>
-
-  </div>
-
-</div>
-</div>
-
-
-<!-- ══════════════════════════════════════════════════
-     SCREEN 4: QUERY DETAIL v3
-══════════════════════════════════════════════════ -->
-<div id="screen-detail" class="screen">
-<div class="page-inner">
-
-  <div class="flex-between mb-16">
-    <div>
-      <div class="mono" style="font-size:11px;color:var(--text3);margin-bottom:3px;">QRY-2025-038</div>
-      <div class="page-title">HACCP Certificate Renewal — Orchard Farms</div>
-      <div style="display:flex;align-items:center;gap:8px;margin-top:5px;">
-        <span class="badge badge-warning"><span class="badge-dot"></span>Under Review</span>
-        <span class="badge badge-danger"><span class="badge-dot"></span>High Priority</span>
-        <span class="sla-badge sla-warn-b">⚠ SLA: 3d left</span>
+  <!-- ═══════════════════════════════════ DESIGN SYSTEM -->
+  <div id="designsystem" class="section">
+    <div class="section-head">
+      <div class="sh-num">06</div>
+      <div class="sh-text">
+        <h2>Design System Documentation</h2>
+        <p>Tokens, typography, components, and spacing from SafeSource v3</p>
       </div>
     </div>
-    <div class="flex gap-8">
-      <button class="btn btn-sm" onclick="showScreen('tracking')">← Back to tracker</button>
-      <button class="btn btn-sm btn-primary" onclick="showToast('Query marked as resolved','✓')">✓ Mark Resolved</button>
-    </div>
-  </div>
 
-  <!-- Progress track v3 -->
-  <div class="card mb-16">
-    <div class="progress-track-v3">
-      <div class="ptv3-step ptv3-line-done">
-        <div class="ptv3-dot ptv3-dot-done">✓</div>
-        <div class="ptv3-label ptv3-label-done">Submitted</div>
-        <div class="ptv3-time">12 Apr</div>
-      </div>
-      <div class="ptv3-step ptv3-line-done">
-        <div class="ptv3-dot ptv3-dot-done">✓</div>
-        <div class="ptv3-label ptv3-label-done">Acknowledged</div>
-        <div class="ptv3-time">13 Apr</div>
-      </div>
-      <div class="ptv3-step">
-        <div class="ptv3-dot ptv3-dot-active">⏳</div>
-        <div class="ptv3-label ptv3-label-active">Doc Awaited</div>
-        <div class="ptv3-time">Now</div>
-      </div>
-      <div class="ptv3-step">
-        <div class="ptv3-dot ptv3-dot-pending">○</div>
-        <div class="ptv3-label">QA Review</div>
-        <div class="ptv3-time">—</div>
-      </div>
-      <div class="ptv3-step">
-        <div class="ptv3-dot ptv3-dot-pending">○</div>
-        <div class="ptv3-label">Resolved</div>
-        <div class="ptv3-time">—</div>
-      </div>
-    </div>
-  </div>
-
-  <div style="display:flex;gap:16px;align-items:flex-start;">
-
-    <!-- Main: Chat -->
-    <div style="flex:1;min-width:0;">
-      <div class="card" style="margin-bottom:14px;">
-        <div class="flex-between mb-14">
-          <div style="font-size:14px;font-weight:700;">Conversation Thread</div>
-          <span style="font-size:11px;color:var(--text3);">4 messages · Last reply 3 hrs ago</span>
-        </div>
-        <div class="chat-wrap" id="chat-wrap">
-          <div class="chat-bw">
-            <div class="chat-av av-qa" aria-label="Riya Kapoor">RK</div>
-            <div>
-              <div class="chat-bubble bubble-qa">
-                Hi Orchard Farms team,<br><br>
-                Your HACCP certificate (ref: HACCP-2021-OF) expired on 3rd April 2025. Please upload the renewed certificate at your earliest convenience. This is required before your next delivery can be approved.
-              </div>
-              <div class="bubble-meta">Riya Kapoor · QA Manager · 12 Apr, 10:14</div>
-            </div>
-          </div>
-
-          <div class="chat-bw">
-            <div class="chat-av av-sys" aria-label="System">⚙</div>
-            <div class="chat-bubble bubble-sys">System: Auto-reminder sent to supplier on Day 3 (15 Apr, 09:00)</div>
-          </div>
-
-          <div class="chat-bw right">
-            <div class="chat-av av-sup" aria-label="Orchard Farms">OF</div>
-            <div>
-              <div class="chat-bubble bubble-sup">
-                Hi Riya, thanks for the note. Our HACCP renewal is with the auditor — we expect it by 30th April. Sharing an interim letter for your records.
-                <div class="doc-attach doc-attach-sup" onclick="showToast('Downloading HACCP_Interim_Letter.pdf','⬇')">
-                  <div class="doc-icon" style="background:rgba(255,255,255,.2)">📄</div>
-                  <div><span class="doc-name" style="color:#fff">HACCP_Interim_Letter.pdf</span><span class="doc-size" style="color:rgba(255,255,255,.6);display:block">84 KB</span></div>
-                  <span style="margin-left:auto;color:rgba(255,255,255,.7);font-size:11px;">⬇</span>
-                </div>
-              </div>
-              <div class="bubble-meta" style="text-align:right;">James T. · Orchard Farms QA · 13 Apr, 09:15</div>
-            </div>
-          </div>
-
-          <div class="chat-bw">
-            <div class="chat-av av-qa" aria-label="Riya Kapoor">RK</div>
-            <div>
-              <div class="chat-bubble bubble-qa">
-                Thank you James. Noted. Please note that the interim letter does not satisfy our compliance requirements — we need the full renewed certificate uploaded to this portal by <strong>30 April</strong>. If not received, delivery approvals will be paused.
-              </div>
-              <div class="bubble-meta">Riya Kapoor · QA Manager · 14 Apr, 11:30</div>
-            </div>
+    <div class="ds-grid">
+      <!-- COLOR SYSTEM -->
+      <div class="ds-card">
+        <div class="ds-card-title">Color Tokens</div>
+        <div style="margin-bottom:10px;">
+          <div style="font-size:11px;color:var(--ink3);margin-bottom:5px;font-family:'DM Mono',monospace;">Surface</div>
+          <div class="swatch-row">
+            <div><div class="swatch" style="background:#F2F0EB"></div><div class="swatch-label">--bg</div></div>
+            <div><div class="swatch" style="background:#FFFFFF;border:1px solid #E2DDD6"></div><div class="swatch-label">--surface</div></div>
+            <div><div class="swatch" style="background:#EDEAE4"></div><div class="swatch-label">--surface2</div></div>
+            <div><div class="swatch" style="background:#E4E0D9"></div><div class="swatch-label">--surface3</div></div>
           </div>
         </div>
-
-        <div class="compose-bar">
-          <textarea class="compose-input" placeholder="Type your message to Orchard Farms…" rows="2" aria-label="Compose message"></textarea>
-          <button class="btn btn-sm" onclick="showToast('File attachment dialog opened','📎')" aria-label="Attach file">📎</button>
-          <button class="btn btn-sm btn-primary" onclick="sendMsg()">Send</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Sidebar -->
-    <div style="width:268px;flex-shrink:0;display:flex;flex-direction:column;gap:12px;">
-      <!-- Supplier health -->
-      <div class="card">
-        <div class="section-label">Supplier Health</div>
-        <div class="compliance-trend">
-          <div>
-            <div style="font-size:24px;font-weight:700;color:var(--warning);">54</div>
-            <div style="font-size:9px;color:var(--text3);font-weight:700;">SCORE /100</div>
-          </div>
-          <div style="flex:1;">
-            <div style="font-size:10px;color:var(--text3);margin-bottom:4px;">6-month trend</div>
-            <div style="display:flex;align-items:flex-end;gap:3px;height:24px;">
-              <div style="width:8px;background:var(--accent);border-radius:2px;height:80%"></div>
-              <div style="width:8px;background:var(--accent);border-radius:2px;height:78%"></div>
-              <div style="width:8px;background:var(--warning);border-radius:2px;height:68%"></div>
-              <div style="width:8px;background:var(--warning);border-radius:2px;height:62%"></div>
-              <div style="width:8px;background:var(--danger);border-radius:2px;height:54%"></div>
-              <div style="width:8px;background:var(--danger);border-radius:2px;height:54%"></div>
-            </div>
-            <div style="font-size:10px;color:var(--danger);margin-top:3px;font-weight:600;">▼ Down 18 pts in 6 months</div>
+        <div style="margin-bottom:10px;">
+          <div style="font-size:11px;color:var(--ink3);margin-bottom:5px;font-family:'DM Mono',monospace;">Semantic</div>
+          <div class="swatch-row">
+            <div><div class="swatch" style="background:#186044"></div><div class="swatch-label">--accent</div></div>
+            <div><div class="swatch" style="background:#B52D2D"></div><div class="swatch-label">--danger</div></div>
+            <div><div class="swatch" style="background:#A05E08"></div><div class="swatch-label">--warning</div></div>
+            <div><div class="swatch" style="background:#1553A0"></div><div class="swatch-label">--info</div></div>
+            <div><div class="swatch" style="background:#4640B0"></div><div class="swatch-label">--purple</div></div>
           </div>
         </div>
         <div>
-          <div class="insight-row"><span class="insight-label">Risk</span><span class="insight-value"><span class="risk-chip risk-high" style="font-size:10px;">High</span></span></div>
-          <div class="insight-row"><span class="insight-label">HACCP</span><span class="insight-value"><span class="cert-pill cert-exp">Expired 12d</span></span></div>
-          <div class="insight-row"><span class="insight-label">ISO 22000</span><span class="insight-value"><span class="cert-pill cert-ok">Valid · Jul 2026</span></span></div>
-          <div class="insight-row"><span class="insight-label">BRCGS</span><span class="insight-value"><span class="cert-pill cert-warn">Exp. Jun 2025</span></span></div>
-          <div class="insight-row"><span class="insight-label">Open NCs</span><span class="insight-value text-danger fw-600">2 unresolved</span></div>
-          <div class="insight-row"><span class="insight-label">Avg. response</span><span class="insight-value" style="color:var(--warning);">6.2 days</span></div>
-        </div>
-        <button class="btn btn-xs" style="width:100%;justify-content:center;margin-top:10px;" onclick="showScreen('dashboard')">View full supplier profile →</button>
-      </div>
-
-      <!-- Query info -->
-      <div class="card">
-        <div class="section-label">Query Info</div>
-        <div>
-          <div class="insight-row"><span class="insight-label">Raised by</span><span class="insight-value">Riya Kapoor</span></div>
-          <div class="insight-row"><span class="insight-label">Due date</span><span class="insight-value text-warning">30 Apr 2025</span></div>
-          <div class="insight-row"><span class="insight-label">Days open</span><span class="insight-value">3 days</span></div>
-          <div class="insight-row"><span class="insight-label">SLA remaining</span><span class="insight-value text-warning fw-600">3 days</span></div>
-          <div class="insight-row"><span class="insight-label">Auto-escalation</span><span class="insight-value">Day 7 → QA Manager</span></div>
-          <div class="insight-row"><span class="insight-label">Reminders</span><span class="insight-value">Day 3 ✓ · Day 6 ○</span></div>
+          <div style="font-size:11px;color:var(--ink3);margin-bottom:5px;font-family:'DM Mono',monospace;">Tints</div>
+          <div class="swatch-row">
+            <div><div class="swatch" style="background:#D7EFE3"></div><div class="swatch-label">acc-light</div></div>
+            <div><div class="swatch" style="background:#FAEBEB"></div><div class="swatch-label">danger-l</div></div>
+            <div><div class="swatch" style="background:#FEF0D9"></div><div class="swatch-label">warn-l</div></div>
+            <div><div class="swatch" style="background:#E2EDFB"></div><div class="swatch-label">info-l</div></div>
+          </div>
         </div>
       </div>
 
-      <!-- Query Actions -->
-      <div class="card">
-        <div class="section-label">Actions</div>
-        <div style="display:flex;flex-direction:column;gap:6px;">
-          <button class="btn btn-sm" style="justify-content:start;" onclick="showToast('Query marked as resolved','✓')">✅ Mark as Resolved</button>
-          <button class="btn btn-sm" style="justify-content:start;" onclick="showToast('Escalated to QA Manager','🔺')">🔺 Escalate to QA Manager</button>
-          <button class="btn btn-sm" style="justify-content:start;" onclick="showToast('Deadline extended by 7 days','📅')">📅 Extend Deadline (+7d)</button>
-          <button class="btn btn-sm" style="justify-content:start;" onclick="showToast('Reminder sent to supplier','📧')">📧 Send Manual Reminder</button>
-          <hr class="divider" style="margin:4px 0">
-          <button class="btn btn-sm btn-danger" style="justify-content:start;" onclick="showToast('Non-conformance raised','❗')">❗ Raise Non-Conformance</button>
+      <!-- TYPOGRAPHY -->
+      <div class="ds-card">
+        <div class="ds-card-title">Typography Scale</div>
+        <div class="type-specimen">
+          <div class="ts-name">Display / Headings</div>
+          <div class="ts-sample-display" style="font-family:'DM Sans',sans-serif;font-size:22px;font-weight:700;letter-spacing:-.5px;">Page Title 22px / 700</div>
+          <div class="ts-meta">DM Sans · letter-spacing: -0.5px</div>
+        </div>
+        <div class="type-specimen">
+          <div class="ts-name">Body / Labels</div>
+          <div class="ts-sample-body">Body text 14px / 400 — QA managers scan, not read. Line-height 1.6.</div>
+          <div class="ts-meta">DM Sans · 14px / 400 · lh 1.6</div>
+        </div>
+        <div class="type-specimen">
+          <div class="ts-name">Mono / Code / IDs</div>
+          <div class="ts-sample-mono">QRY-2025-047 · HACCP-2021-OF</div>
+          <div class="ts-meta">DM Mono · 12px · Used for query IDs, cert refs, scores</div>
+        </div>
+        <div class="type-specimen">
+          <div class="ts-name">Section Labels</div>
+          <div style="font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#9B9892;font-family:'DM Mono',monospace;">ESCALATIONS & SLA ALERTS</div>
+          <div class="ts-meta">DM Mono · 10px / 700 · uppercase · ls 0.8px</div>
         </div>
       </div>
 
-      <!-- Activity log -->
-      <div class="card">
-        <div class="section-label">Activity Log</div>
-        <div>
-          <div class="timeline-step"><div class="ts-dot ts-done">✓</div><div class="ts-body"><strong>Query submitted</strong><span>Riya K. · 12 Apr, 10:24</span></div></div>
-          <div class="timeline-step"><div class="ts-dot ts-system">⚙</div><div class="ts-body"><strong>Auto-reminder sent</strong><span>System · 15 Apr, 09:00</span></div></div>
-          <div class="timeline-step"><div class="ts-dot ts-done">✓</div><div class="ts-body"><strong>Supplier acknowledged</strong><span>James T. · 13 Apr, 09:15</span></div></div>
-          <div class="timeline-step"><div class="ts-dot ts-active">⏳</div><div class="ts-body"><strong>Awaiting document</strong><span>Expected: 30 Apr</span></div></div>
-          <div class="timeline-step"><div class="ts-dot ts-pending">○</div><div class="ts-body"><strong>Day 6 reminder</strong><span style="color:var(--text3)">Scheduled · 18 Apr</span></div></div>
-          <div class="timeline-step"><div class="ts-dot ts-pending">○</div><div class="ts-body"><strong>Auto-escalation</strong><span style="color:var(--text3)">Triggers Day 7 if no doc</span></div></div>
+      <!-- COMPONENTS -->
+      <div class="ds-card">
+        <div class="ds-card-title">Badge System</div>
+        <div class="comp-row">
+          <span class="badge badge-g">✓ Low Risk</span>
+          <span class="badge badge-a">! Med Risk</span>
+          <span class="badge badge-r">✕ High Risk</span>
+          <span class="badge badge-b">Info</span>
+          <span class="badge badge-n">Neutral</span>
         </div>
+        <div style="font-size:11px;color:var(--ink3);margin-top:8px;">5 semantic variants. All use background tint + dark foreground for readability. Never rely on color alone — always paired with text or symbol.</div>
+
+        <div class="ds-card-title" style="margin-top:16px;">Button Hierarchy</div>
+        <div class="comp-row">
+          <button class="btn-demo btn-primary-d">Primary</button>
+          <button class="btn-demo btn-secondary-d">Secondary</button>
+          <button class="btn-demo btn-danger-d">Danger</button>
+        </div>
+        <div style="font-size:11px;color:var(--ink3);margin-top:6px;">3-tier hierarchy. Primary = green solid for confirmations. Secondary = white/border for supporting actions. Danger = red tint, only for destructive actions.</div>
+      </div>
+
+      <!-- SPACING -->
+      <div class="ds-card">
+        <div class="ds-card-title">Spacing Scale (4px base)</div>
+        <div class="spacing-row"><div class="spacing-box" style="width:4px"></div><div class="spacing-label">4px — gap-4 · icon spacing</div></div>
+        <div class="spacing-row"><div class="spacing-box" style="width:8px"></div><div class="spacing-label">8px — gap-8 · inline elements</div></div>
+        <div class="spacing-row"><div class="spacing-box" style="width:12px"></div><div class="spacing-label">12px — gap-12 · card internals</div></div>
+        <div class="spacing-row"><div class="spacing-box" style="width:16px"></div><div class="spacing-label">16px — gap-16 · section spacing</div></div>
+        <div class="spacing-row"><div class="spacing-box" style="width:20px"></div><div class="spacing-label">20px — mt-20 · major sections</div></div>
+        <div class="spacing-row"><div class="spacing-box" style="width:28px"></div><div class="spacing-label">28px — page gutters</div></div>
+
+        <div class="ds-card-title" style="margin-top:14px;">Border Radius</div>
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+          <div style="width:28px;height:28px;background:var(--green-light);border-radius:5px;border:1px solid #A8D5BC"></div>
+          <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--ink3)">5px · badges</span>
+          <div style="width:28px;height:28px;background:var(--green-light);border-radius:8px;border:1px solid #A8D5BC"></div>
+          <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--ink3)">8px · buttons</span>
+          <div style="width:28px;height:28px;background:var(--green-light);border-radius:10px;border:1px solid #A8D5BC"></div>
+          <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--ink3)">10px · cards</span>
+          <div style="width:28px;height:28px;background:var(--green-light);border-radius:14px;border:1px solid #A8D5BC"></div>
+          <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--ink3)">14px · modals</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-card" style="margin-top:16px;">
+      <div class="ds-card-title">Component Inventory</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:4px;">
+        <div style="font-size:13px;color:var(--ink2);padding:8px;background:var(--paper);border-radius:7px;">📊 Stat Cards (4 variants)</div>
+        <div style="font-size:13px;color:var(--ink2);padding:8px;background:var(--paper);border-radius:7px;">🏷 Badges (5 variants)</div>
+        <div style="font-size:13px;color:var(--ink2);padding:8px;background:var(--paper);border-radius:7px;">🔘 Filter Chips</div>
+        <div style="font-size:13px;color:var(--ink2);padding:8px;background:var(--paper);border-radius:7px;">🌡 Risk Chips (3)</div>
+        <div style="font-size:13px;color:var(--ink2);padding:8px;background:var(--paper);border-radius:7px;">📏 SLA Progress Bars</div>
+        <div style="font-size:13px;color:var(--ink2);padding:8px;background:var(--paper);border-radius:7px;">🚩 Escalation Flags</div>
+        <div style="font-size:13px;color:var(--ink2);padding:8px;background:var(--paper);border-radius:7px;">🤖 AI Suggestion Box</div>
+        <div style="font-size:13px;color:var(--ink2);padding:8px;background:var(--paper);border-radius:7px;">📋 Template Cards</div>
+        <div style="font-size:13px;color:var(--ink2);padding:8px;background:var(--paper);border-radius:7px;">💬 Chat Bubbles</div>
+        <div style="font-size:13px;color:var(--ink2);padding:8px;background:var(--paper);border-radius:7px;">⏱ Activity Timeline</div>
+        <div style="font-size:13px;color:var(--ink2);padding:8px;background:var(--paper);border-radius:7px;">📢 Action Banner</div>
+        <div style="font-size:13px;color:var(--ink2);padding:8px;background:var(--paper);border-radius:7px;">🧩 Bulk Action Bar</div>
       </div>
     </div>
   </div>
 
-</div>
-</div>
+  <!-- ═══════════════════════════════════ OPPORTUNITIES -->
+  <div id="opportunities" class="section">
+    <div class="section-head">
+      <div class="sh-num">07</div>
+      <div class="sh-text">
+        <h2>Opportunities for v4</h2>
+        <p>Specific, actionable improvements to discuss in interview</p>
+      </div>
+    </div>
+
+    <div class="opp-grid">
+      <div class="opp-card opp-high">
+        <div class="opp-priority">🔴 High Priority</div>
+        <div class="opp-title">Kanban View for Query Tracker</div>
+        <div class="opp-desc">Replace the 9-column table with a Kanban board (columns: New → Awaiting Supplier → Awaiting Review → Resolved). This maps to how QA managers mentally think about work in progress and reduces scan time dramatically.</div>
+      </div>
+      <div class="opp-card opp-high">
+        <div class="opp-priority">🔴 High Priority</div>
+        <div class="opp-title">Draft Auto-Save in Raise Query</div>
+        <div class="opp-desc">If a user accidentally navigates away from the Raise Query form, all work is lost. Auto-save to local draft with a "You have a draft" banner on return would prevent frustration and data loss.</div>
+      </div>
+      <div class="opp-card opp-med">
+        <div class="opp-priority">🟡 Medium Priority</div>
+        <div class="opp-title">Error States & Validation Design</div>
+        <div class="opp-desc">Design explicit error states for: form validation, file upload failure, network timeout, supplier not found. Each should have a clear message, an icon, and a recovery action — not just a red border.</div>
+      </div>
+      <div class="opp-card opp-med">
+        <div class="opp-priority">🟡 Medium Priority</div>
+        <div class="opp-title">Responsive Tablet Layout</div>
+        <div class="opp-desc">QA managers conduct on-site audits with iPads. A tablet-optimised layout would: collapse the supplier table to show 4 key columns, make the heatmap cells 44px touch targets, and simplify the Raise Query form to a wizard-style flow.</div>
+      </div>
+      <div class="opp-card opp-low">
+        <div class="opp-priority">🟢 Enhancement</div>
+        <div class="opp-title">Certificate Expiry Calendar View</div>
+        <div class="opp-desc">A monthly calendar showing upcoming certificate expirations across all 48 suppliers would let QA managers do proactive planning ("3 certs expire next month — time to run bulk outreach"). This would reduce the reactive firefighting pattern visible in the dashboard.</div>
+      </div>
+      <div class="opp-card opp-low">
+        <div class="opp-priority">🟢 Enhancement</div>
+        <div class="opp-title">Supplier Self-Service Portal</div>
+        <div class="opp-desc">The current design is entirely internal. A supplier-facing view where suppliers can upload certificates, view outstanding queries, and update their contact details would reduce QA manager workload and improve data quality. This is a natural v4 scope expansion.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════ SUMMARY -->
+  <div id="summary" class="section">
+    <div class="section-head">
+      <div class="sh-num">08</div>
+      <div class="sh-text">
+        <h2>Interview Readiness Summary</h2>
+        <p>What this work shows, and what to prepare</p>
+      </div>
+    </div>
+
+    <div class="readiness-grid">
+      <div class="rg-card">
+        <div class="rg-icon">🎯</div>
+        <div class="rg-title">Problem Framing</div>
+        <div class="rg-verdict rg-yes">✓ Strong</div>
+        <div class="rg-desc">The design clearly shows understanding of who the user is, what they need to do, and what goes wrong without the tool.</div>
+      </div>
+      <div class="rg-card">
+        <div class="rg-icon">🔄</div>
+        <div class="rg-title">Design Iteration</div>
+        <div class="rg-verdict rg-yes">✓ Strong</div>
+        <div class="rg-desc">The v3 naming and "IMPROVEMENT #" comments in code show explicit awareness of what changed and why — evidence of iteration.</div>
+      </div>
+      <div class="rg-card">
+        <div class="rg-icon">🧩</div>
+        <div class="rg-title">Systems Thinking</div>
+        <div class="rg-verdict rg-yes">✓ Strong</div>
+        <div class="rg-desc">Reusable tokens, consistent component variants, cross-screen pattern consistency — shows a design system mindset.</div>
+      </div>
+      <div class="rg-card">
+        <div class="rg-icon">👥</div>
+        <div class="rg-title">User Research Evidence</div>
+        <div class="rg-verdict rg-part">⚠ Implied</div>
+        <div class="rg-desc">Deep domain knowledge is evident but no explicit user research callouts. Prepare to explain where insights came from (research, shadowing, domain expertise).</div>
+      </div>
+      <div class="rg-card">
+        <div class="rg-icon">♿</div>
+        <div class="rg-title">Accessibility Depth</div>
+        <div class="rg-verdict rg-part">⚠ Surface</div>
+        <div class="rg-desc">Non-color signals and ARIA labels show awareness, but there's no evidence of WCAG compliance testing. Prepare to discuss what you would test.</div>
+      </div>
+      <div class="rg-card">
+        <div class="rg-icon">📏</div>
+        <div class="rg-title">Metrics & Success</div>
+        <div class="rg-verdict rg-part">⚠ Prepare</div>
+        <div class="rg-desc">The design hints at metrics (Avg. 11d resolution time) but no explicit success criteria are defined. Prepare: "I would measure time-to-action on escalations and query SLA compliance rate."</div>
+      </div>
+    </div>
+
+    <div class="callout callout-green" style="margin-top:24px;">
+      <strong>Top 3 Things to Prepare for Interview:</strong><br><br>
+      1. <strong>"Walk me through a design decision you made in v3."</strong> — Use the AI suggestion box with reasoning. Explain why you showed confidence score and reasoning instead of just an action button. This shows nuanced AI UX thinking.<br><br>
+      2. <strong>"What would you do differently in v4?"</strong> — Kanban tracker, draft auto-save, mobile tablet layout. Have a clear rationale tied to user pain points from the journey.<br><br>
+      3. <strong>"How did you validate this design?"</strong> — Be honest about what was validated vs. assumed. If it was a solo project, describe what heuristic testing or domain research you did.
+    </div>
+
+    <div class="verdict-box" style="margin-top:32px;">
+      <div class="verdict-icon">🏆</div>
+      <div>
+        <div class="verdict-label">Final Recommendation</div>
+        <div class="verdict-title">Select for Interview — Confident Yes</div>
+        <div class="verdict-body">This is a portfolio piece that demonstrates product maturity, domain knowledge, systems thinking, and genuine UX craft. The gaps (mobile, error states, empty states) are the kind that show self-awareness when discussed in interview — not weaknesses that disqualify. Score: 8.2/10. This work will hold up under senior UX interview scrutiny.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <div class="df-left">SafeSource v3 — UX Review</div>
+    <div class="df-right">Generated · April 2026</div>
+  </div>
+
+</main>
 
 <script>
-/* ── SCREEN NAVIGATION ── */
-function showScreen(id) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-  document.getElementById('screen-' + id).classList.add('active');
-  const idx = ['dashboard','raise','tracking','detail'].indexOf(id);
-  if (idx > -1) document.querySelectorAll('.nav-tab')[idx].classList.add('active');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-/* ── NOTIFICATIONS ── */
-function toggleNotif() {
-  const p = document.getElementById('notif-panel');
-  p.classList.toggle('open');
-  document.addEventListener('click', function handler(e) {
-    if (!p.contains(e.target) && !document.querySelector('.notif-btn').contains(e.target)) {
-      p.classList.remove('open');
-      document.removeEventListener('click', handler);
-    }
+// Animate score bars on load
+window.addEventListener('load', () => {
+  const fills = document.querySelectorAll('.sc-fill');
+  fills.forEach(f => {
+    const w = f.style.width;
+    f.style.width = '0';
+    setTimeout(() => { f.style.width = w; }, 300);
   });
-}
 
-/* ── FORMS ── */
-function selectTemplate(el) {
-  document.querySelectorAll('.template-card').forEach(c => c.classList.remove('selected'));
-  el.classList.add('selected');
-}
-function setPriority(level, el) {
-  document.querySelectorAll('.priority-opt').forEach(o => { o.className = 'priority-opt'; });
-  if (level === 'low') el.classList.add('sel-low');
-  if (level === 'med') el.classList.add('sel-med');
-  if (level === 'high') el.classList.add('sel-high');
-}
-
-/* ── FILTER CHIPS ── */
-function filterChip(el) {
-  const parent = el.closest('.filter-chips');
-  parent.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
-  el.classList.add('active');
-}
-document.querySelectorAll('.filter-chips').forEach(group => {
-  group.querySelectorAll('.chip').forEach(chip => {
-    chip.addEventListener('click', function() { filterChip(this); });
-  });
+  // Active nav on scroll
+  const sections = document.querySelectorAll('.section[id]');
+  const links = document.querySelectorAll('.nav-link');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => {
+          l.classList.toggle('active', l.getAttribute('href') === '#' + e.target.id);
+        });
+      }
+    });
+  }, { threshold: 0.3 });
+  sections.forEach(s => observer.observe(s));
+  // also observe verdict
+  const verdict = document.getElementById('verdict');
+  if(verdict) observer.observe(verdict);
 });
-
-/* ── BULK SELECTION ── */
-let selectedCount = 0;
-function updateBulk(cb) {
-  selectedCount = document.querySelectorAll('.row-checkbox:checked:not(#select-all)').length;
-  const bar = document.getElementById('bulk-bar');
-  const count = document.getElementById('bulk-count');
-  if (selectedCount > 0) {
-    bar.style.display = 'flex';
-    count.textContent = selectedCount + ' supplier' + (selectedCount > 1 ? 's' : '') + ' selected';
-  } else {
-    bar.style.display = 'none';
-  }
-}
-function toggleSelectAll(cb) {
-  document.querySelectorAll('.row-checkbox:not(#select-all)').forEach(c => {
-    c.checked = cb.checked;
-    const row = c.closest('.sup-row');
-    if (row) row.classList.toggle('selected', cb.checked);
-  });
-  updateBulk();
-}
-function clearSelection() {
-  document.querySelectorAll('.row-checkbox').forEach(c => { c.checked = false; });
-  document.querySelectorAll('.sup-row').forEach(r => r.classList.remove('selected'));
-  document.getElementById('bulk-bar').style.display = 'none';
-  selectedCount = 0;
-}
-document.querySelectorAll('.row-checkbox:not(#select-all)').forEach(cb => {
-  cb.addEventListener('change', function() {
-    const row = this.closest('.sup-row');
-    if (row) row.classList.toggle('selected', this.checked);
-    updateBulk(this);
-  });
-});
-
-/* ── ROW CLICK (ignore checkbox area) ── */
-function rowClick(event, screen) {
-  if (event.target.type === 'checkbox' || event.target.tagName === 'BUTTON') return;
-  showScreen(screen);
-}
-
-/* ── TOAST ── */
-let toastTimer;
-function showToast(msg, icon) {
-  const t = document.getElementById('toast');
-  const m = document.getElementById('toast-msg');
-  const i = document.getElementById('toast-icon');
-  m.textContent = msg;
-  i.textContent = icon || '✓';
-  t.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => t.classList.remove('show'), 3000);
-}
-
-/* ── SEND MESSAGE ── */
-function sendMsg() {
-  const input = document.querySelector('.compose-input');
-  const val = input.value.trim();
-  if (!val) return;
-  const wrap = document.getElementById('chat-wrap');
-  const msg = document.createElement('div');
-  msg.className = 'chat-bw';
-  msg.innerHTML = `
-    <div class="chat-av av-qa" aria-label="Riya Kapoor">RK</div>
-    <div>
-      <div class="chat-bubble bubble-qa">${val}</div>
-      <div class="bubble-meta">Riya Kapoor · Just now</div>
-    </div>`;
-  wrap.appendChild(msg);
-  input.value = '';
-  wrap.scrollTop = wrap.scrollHeight;
-  showToast('Message sent to Orchard Farms', '✓');
-}
 </script>
 </body>
 </html>
